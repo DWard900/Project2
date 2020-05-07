@@ -16,3 +16,5 @@ login.login_view = 'login'
 from app import routes
 # Chap 4 of tutorial - models will define structure of database
 from app import models 
+# Chap 7 of tutorial
+from app import errors
