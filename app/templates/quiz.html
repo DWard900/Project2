@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <p>Enter your exercise data in the form below:</p>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.style.label }}<br>
+            {{ form.style(cols=32, rows=4) }}<br>
+            {% for error in form.style.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}<br>
+            {{ form.time.label }}
+            <br>
+            {{ form.time(cols=32, rows=4) }}<br>
+            {% for error in form.time.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
