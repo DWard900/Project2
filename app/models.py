@@ -34,7 +34,7 @@ class Exercise(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return '<Exercise {}>'.format(self.body)
+        return '<Exercise {}>'.format(self.style)
 
 @login.user_loader
 def load_user(id):

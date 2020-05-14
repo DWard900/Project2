@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, ExerciseForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Exercise
 from werkzeug.urls import url_parse
 from datetime import datetime
 
@@ -14,18 +14,20 @@ def index():
     #Create user data
     user = {'username': 'Elise'}
 
-    posts = [
+    exercise = [
         {
-            'author': {'username': 'Elise'},
-            'body': 'Social distancing is better than people seem to believe'
+            'user': {'username': 'Elise'},
+            'style': 'Run',
+            'time': '30',
         },
         {
-            'author': {'username': 'Tim'},
-            'body': 'Other text'
+            'user': {'username': 'Dan'},
+            'style': 'Run',
+            'time': '20',
         }
     ]
 
-    return render_template("index.html", title="Home", posts = posts)
+    return render_template("index.html", title="Home", exercise = exercise)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -93,3 +95,16 @@ def edit_profile():
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile', form=form)
+
+@app.route('/quiz', methods=['GET', 'POST'])
+@login_required
+def quiz():
+    form = ExerciseForm()
+    if form.validate_on_submit():
+        exercise = Exercise(style=form.style.data, time=form.time.data, user=current_user)
+        db.session.add(exercise)
+        db.session.commit()
+        flash('Thank you for submitting')
+        return redirect(url_for('index'))
+
+    return render_template("quiz.html", title="Quiz Page", form=form)
