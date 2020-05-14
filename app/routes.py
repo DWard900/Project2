@@ -14,18 +14,7 @@ def index():
     #Create user data
     user = {'username': 'Elise'}
 
-    exercise = [
-        {
-            'user': {'username': 'Elise'},
-            'style': 'Run',
-            'time': '30',
-        },
-        {
-            'user': {'username': 'Dan'},
-            'style': 'Run',
-            'time': '20',
-        }
-    ]
+    exercise = Exercise.query.all()
 
     return render_template("index.html", title="Home", exercise = exercise)
 
@@ -69,10 +58,7 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    exercise = [
-        {'user': user, 'style': 'Test run #1', 'time': 'Test time #1'},
-        {'user': user, 'style': 'Test run #1', 'time': 'Test time #2'}
-    ]
+    exercise = Exercise.query.filter_by(user_id=user.id)
     return render_template('user.html', user=user, exercise=exercise)
 
 @app.before_request
