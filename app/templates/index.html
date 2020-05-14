@@ -1,17 +1,8 @@
-<html>
-    <head>
-      {% if title %}
-      <title> {{ title }} - Elise's Website </title>
-      {% else %}
-      <title>Welcome to Elise's Website!</title>
-      {% end if %}
-    </head>
-    <body>
-      <h1> Hello, {{ user.username }} </h1>
-      {% for post in posts %}
-      <div>
-          <p> {{ post.author.username }} says: <b> {{ post.body }} </b></p>
-      </div>
-      {% end for %}
-    </body>
-  </html>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi, {{ current_user.username }}!</h1>
+    {% for post in posts %}
+    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+    {% endfor %}
+{% endblock %}
