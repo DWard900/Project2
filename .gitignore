@@ -1,9 +1,5 @@
 #git-ignore
 .vscode/*
 venv/*
-<<<<<<< HEAD
-app.db
-=======
 app.db
 .pyc
->>>>>>> master
