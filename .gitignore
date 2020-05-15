@@ -2,5 +2,4 @@
 .vscode/*
 venv/*
 app.db
-__pycache__/*
-.pyc
+*.pyc
