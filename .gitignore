@@ -1,5 +1,3 @@
 #git-ignore
 .vscode/*
 venv/*
-app.db
-.pyc
