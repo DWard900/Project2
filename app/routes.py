@@ -12,8 +12,6 @@ from datetime import datetime
 def index():
 
     #Create user data
-    user = {'username': 'Elise'}
-
     exercise = Exercise.query.all()
 
     return render_template("index.html", title="Home", exercise = exercise)
