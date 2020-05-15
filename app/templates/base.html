@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      {% if title %}
+      <title> {{ title }} - Running App </title>
+      {% else %}
+      <title>CITS5505 Project 2 - Elise and Dan</title>
+      {% endif %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap stylesheet -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">    
+    <!-- Overall stylesheet and page specific stylesheet -->
+    <link rel="stylesheet" href="/static/css/stylesheet.css">
+    <!-- Bootstrap scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+      <!-- Navbar in Bootstrap -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <ul class="nav navbar-nav">
+            <li {% if request.path == url_for('index') or request.path == '/' %}class="active"{% endif %}><a href="{{ url_for('index') }}">Home</a></li>
+            {% if current_user.is_anonymous %}
+            <li {% if request.path == url_for('login') %}class="active"{% endif %}><a href="{{ url_for('login') }}">Login</a></li>
+            {% else %}
+            <li {% if request.path == url_for('quiz') %}class="active"{% endif %}><a href="{{ url_for('quiz') }}">Quiz</a></li>
+            <li {% if request.path == url_for('results') %}class="active"{% endif %}><a href="{{ url_for('results') }}">Results page</a></li>
+            <li {% if request.path == url_for('groupview') %}class="active"{% endif %}><a href="{{ url_for('groupview') }}">Group view</a></li>
+            <li {% if request.path == url_for('user', username=current_user.username) %}class="active"{% endif %}><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <hr>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </body>
+</html>
