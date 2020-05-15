@@ -34,5 +34,6 @@ class EditProfileForm(FlaskForm):
 
 class ExerciseForm(FlaskForm):
     style = TextAreaField('Enter type of exercise', validators=[DataRequired(), Length(min=1, max=140)])
+    distance = TextAreaField('Enter type of exercise', validators=[DataRequired(), Length(min=1, max=140)])
     time = TextAreaField('Enter time', validators=[DataRequired(), Length(min=1, max=140)])
     submit = SubmitField('Submit')
