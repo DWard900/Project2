@@ -1,26 +1,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Sign In</h1>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="container-fluid">
+      <div class="col-sm-6">
+        <h1>Welcome to XXXXX app</h1>
+      </div>
+      <div class="col-sm-6">
+        <img src="static/assets/placeholder.png" alt="App logo/image">
+      </div>
+    </div>
 
-    <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+    <div class="container-fluid">
+      <div class="col-sm-12">
+        <p>This app is designed to Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Duis eu imperdiet nisi, ac maximus dui. Aenean bibendum justo id urna vehicula ultrices. 
+            Aenean auctor nunc diam, accumsan lacinia ex blandit eu. Proin ut leo lobortis, rhoncus arcu 
+            eu, sagittis diam. Mauris vel luctus ex, at semper quam. Proin molestie sodales ligula et 
+            ultrices. Suspendisse eget elit non arcu auctor consequat. Sed dui tellus, imperdiet ut 
+            sapien in, sagittis aliquet ipsum. In ut massa euismod, accumsan felis a, pharetra metus. 
+            Cras blandit tortor id dui malesuada pulvinar. Cras convallis sollicitudin mollis. Phasellus 
+            et venenatis erat, at laoreet quam. Proin ultricies congue eros, sed aliquam ante varius vel.
+        </p>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="col-sm-12">
+        <h2>Sign in to the app</h2>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32) }}<br>
+                {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(size=32) }}<br>
+                {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+            <p>{{ form.submit() }}</p>
+        </form>
+        <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+      </div>
+    </div>
 {% endblock %}
