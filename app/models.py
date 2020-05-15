@@ -39,6 +39,7 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     #token = db.Column(db.String(32), index=True, unique = True)
     #token_expiration = db.Column(db.DateTime)
+    #admin = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)

@@ -45,6 +45,11 @@
             {% endfor %}<br>
             {{ form.time.label }}
             <br>
+            {{ form.distance(cols=32, rows=4) }}<br>
+            {% for error in form.distance.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <br>
             {{ form.time(cols=32, rows=4) }}<br>
             {% for error in form.time.errors %}
             <span style="color: red;">[{{ error }}]</span>
