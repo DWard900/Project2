@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
     exercise = db.relationship('Exercise', backref='user', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    #admin = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
