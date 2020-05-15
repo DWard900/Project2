@@ -2,4 +2,4 @@
 .vscode/*
 venv/*
 app.db
-.pyc
+*.pyc
