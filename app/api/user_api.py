@@ -8,8 +8,18 @@ from flask import jsonify, url_for, request, g, abort
 #token_auth.login_required
 def get_user(id):
     return jsonify(User.query.get_or_404(id).to_dict())
-'''
-@app.route('/api/users', methods=['POST'])
+
+@app.route('/api/users', methods=['GET'])
+def get_user_list():
+    userList = User.query.all()
+    users = []
+    for u in userList:
+        users.append({'id': u.id, 'username': u.username, 'about_me': u.about_me,
+                    'last_seen': u.last_seen.isoformat() + 'Z', 'exercise_count': u.exercise.count()})
+    return jsonify(users)
+
+
+'''@app.route('/api/users', methods=['POST'])
 def register_user():
     data = request.get_json() or {}
     if 'id' not in data:
@@ -26,10 +36,10 @@ def register_user():
     response.headers['Location'] = url_for('get_user',id=user.id)
     return response'''
 
-@app.route('/api/users/<int:id>/exercise', methods=['GET'])
+'''@app.route('/api/users/<int:id>/exercise', methods=['GET'])
 def get_exercise(id):
     user = User.query.get_or_404(id)
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 10, type=int), 100)
     data = User.to_collection_dict(user.exercise, page, per_page, get_exercise, id=id)
-    return jsonify(data)
+    return jsonify(data)'''
