@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, ExerciseForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, ExerciseForm, EmptyForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Exercise
 from werkzeug.urls import url_parse
@@ -66,8 +66,48 @@ def groupview():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    exercise = Exercise.query.filter_by(user_id=user.id)
-    return render_template('user.html', user=user, exercise=exercise)
+    exercises = Exercise.query.filter_by(user_id=user.id)
+    form = EmptyForm()
+    return render_template('user.html', user=user ,exercises=exercises , form=form)
+
+@app.route('/follow/<username>', methods=['POST'])
+@login_required
+def follow(username):
+    form = EmptyForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=username).first()
+        if user is None:
+            flash('User {} not found.'.format(username))
+            return redirect(url_for('index'))
+        if user == current_user:
+            flash('You cannot follow yourself!')
+            return redirect(url_for('user', username=username))
+        current_user.follow(user)
+        db.session.commit()
+        flash('You are following {}!'.format(username))
+        return redirect(url_for('user', username=username))
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/unfollow/<username>', methods=['POST'])
+@login_required
+def unfollow(username):
+    form = EmptyForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=username).first()
+        if user is None:
+            flash('User {} not found.'.format(username))
+            return redirect(url_for('index'))
+        if user == current_user:
+            flash('You cannot unfollow yourself!')
+            return redirect(url_for('user', username=username))
+        current_user.unfollow(user)
+        db.session.commit()
+        flash('You are not following {}.'.format(username))
+        return redirect(url_for('user', username=username))
+    else:
+        return redirect(url_for('index'))
 
 @app.before_request
 def before_request():
@@ -95,7 +135,7 @@ def edit_profile():
 def quiz():
     form = ExerciseForm()
     if form.validate_on_submit():
-        exercise = Exercise(style=form.style.data, time=form.time.data, user=current_user)
+        exercise = Exercise(style=form.style.data, time=form.time.data, distance=form.distance.data, user=current_user)
         db.session.add(exercise)
         db.session.commit()
         flash('Thank you for submitting')
@@ -109,3 +149,13 @@ def admin(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('adminview.html', user=user)
 
+#delete post
+@app.route('/delete_post/<int:exercise_id>', methods= ['POST'])
+@login_required
+def delete_post(exercise_id):
+    #db.session.execute('delete from Exercise WHERE id = %s', [id])
+    exercise = Exercise.query.get(exercise_id)
+    db.session.delete(exercise)
+    db.session.commit()
+    flash('Entry was deleted')
+    return redirect('http://127.0.0.1:5000/user/ward')

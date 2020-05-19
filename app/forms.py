@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField, IntegerField, TimeField, FloatField
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length, NumberRange
 from app.models import User
 
 class LoginForm(FlaskForm):
@@ -33,7 +33,11 @@ class EditProfileForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class ExerciseForm(FlaskForm):
-    style = TextAreaField('Enter type of exercise', validators=[DataRequired(), Length(min=1, max=140)])
-    distance = TextAreaField('Enter type of exercise', validators=[DataRequired(), Length(min=1, max=140)])
-    time = TextAreaField('Enter time', validators=[DataRequired(), Length(min=1, max=140)])
+    styles = [('Walk','Walk'), ('Run','Run')] #Not sure why this need to be a tuple rather than just a single string?
+    style = SelectField('Enter type of exercise', choices= styles, validators=[DataRequired()])
+    distance = FloatField('Enter distance of exercise', validators=[DataRequired()])
+    time = FloatField('Enter time')
+    submit = SubmitField('Submit')
+
+class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')

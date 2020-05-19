@@ -2,7 +2,16 @@
   <div class="col-sm-12">
     <p>
       <img src="{{ exercise.user.avatar(36) }}">
-      {{ exercise.user.username }} did: <b>{{ exercise.style }}</b> in {{ exercise.time }}
+      <b>{{ exercise.user.username }}</b>
+      <br> Exercise: <b>{{ exercise.style }}</b> 
+      <br> Time: {{ exercise.time }}
+      {% if user == current_user %}
+      <td>
+        <form action="{{url_for('delete_post', exercise_id=exercise.id)}}" method="post">
+          <input type='submit' value="Delete" class="btn btn-danger">
+        </form>
+      </td>
+      {% endif %}
     </p>
   </div>
 </div>
