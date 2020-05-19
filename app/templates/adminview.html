@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block body_attrs %} onload="getUsers();" {% endblock %}
+{% block content %}
+  <div class="container-fluid">
+    <div class="col-sm-12 text-center">
+      <h1>Administrator View</h1>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="col-sm-12">
+        <h2>Edit Users</h2>
+        <h3>User table</h3>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="col-sm-6">
+        <br>
+        <div id="user-table"></div>
+    </div>
+    <div class="col-sm-6">
+        <div id="exercise-table"></div>
+    </div>
+  </div>  
+
+  <div id="jquery"></div>
+
+{% endblock %}

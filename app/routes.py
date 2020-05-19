@@ -102,3 +102,10 @@ def quiz():
         return redirect(url_for('index'))
 
     return render_template("quiz.html", title="Quiz Page", form=form)
+
+@app.route('/admin/<username>')
+@login_required
+def admin(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('adminview.html', user=user)
+
