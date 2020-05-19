@@ -1,25 +1,46 @@
 {% extends "base.html" %}
 
+{% block body_attrs %} onload="getGraph({{ current_user.id }});" {% endblock %}
 {% block content %}
   <div class="container-fluid">
-    <div class="col-sm-1">
+    <div class="col-sm-2">
       <img src="{{ user.avatar(128) }}">
     </div>
-    <div class="col-sm-11">
+    <div class="col-sm-10">
       <h1>User: {{ user.username }}</h1>
       {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
       {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
+      <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
       {% if user == current_user %}
       <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
+      {% elif not current_user.is_following(user) %}
+      <p>
+          <form action="{{ url_for('follow', username=user.username) }}" method="post">
+              {{ form.hidden_tag() }}
+              {{ form.submit(value='Follow') }}
+          </form>
+      </p>
+      {% else %}
+      <p>
+          <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+              {{ form.hidden_tag() }}
+              {{ form.submit(value='Unfollow') }}
+          </form>
+      </p>
       {% endif %}
     </div>
   </div>
   <hr>
   <div class="container-fluid">
-    <div class="col-sm-12">
-      {% for exercise in exercise %}
-      {% include '_exercise.html' %}
+    <div class="col-sm-6">
+      {% for exercise in exercises %}
+        {% include '_exercise.html' %}
       {% endfor %}
+      test
+    </div>
+    <div class="col-sm-6">
+      <h2>Your exercises to-date</h2>
+      <canvas id="barChart"></canvas>
     </div>
   </div>
 

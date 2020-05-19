@@ -15,8 +15,13 @@
     <!-- Bootstrap scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <!-- My scripts -->
+    <script src="/static/javascript/script.js"></script>
+    <script src="/static/javascript/charts.js"></script>
     </head>
-    <body>
+    <body {% block body_attrs %}{% endblock %}>
       <!-- Navbar in Bootstrap -->
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -29,12 +34,12 @@
             <li {% if request.path == url_for('results') %}class="active"{% endif %}><a href="{{ url_for('results') }}">Results page</a></li>
             <li {% if request.path == url_for('groupview') %}class="active"{% endif %}><a href="{{ url_for('groupview') }}">Group view</a></li>
             <li {% if request.path == url_for('user', username=current_user.username) %}class="active"{% endif %}><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
+            <li {% if request.path == url_for('admin', username=current_user.username) %}class="active"{% endif %}><a href="{{ url_for('admin', username=current_user.username) }}">Admin</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}
           </ul>
         </div>
       </nav>
-      <hr>
       {% with messages = get_flashed_messages() %}
       {% if messages %}
       <ul>

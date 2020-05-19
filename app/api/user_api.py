@@ -9,7 +9,17 @@ from flask import jsonify, url_for, request, g, abort
 def get_user(id):
     return jsonify(User.query.get_or_404(id).to_dict())
 
-@app.route('/api/users', methods=['GET'])
+@app.route('/api/users/<int:userId>/exercise', methods=['GET'])
+def get_exercise(userId):
+    user = User.query.get_or_404(userId)
+    exerciseList = user.exercise.all()
+    exercise = []
+    for e in exerciseList:
+        exercise.append({'id': e.id, 'style': e.style, 'time': e.time,
+                        'timestamp': e.timestamp.isoformat() + 'Z'})
+    return jsonify(exercise)
+
+@app.route('/api/users', methods=['GET', 'POST'])
 def get_user_list():
     userList = User.query.all()
     users = []
@@ -18,6 +28,14 @@ def get_user_list():
                     'last_seen': u.last_seen.isoformat() + 'Z', 'exercise_count': u.exercise.count()})
     return jsonify(users)
 
+@app.route('/api/users/<int:userId>/exercise/time_graph', methods=['GET'])
+def exercise_graph(userId):
+    user = User.query.get_or_404(userId)
+    exerciseList = user.exercise.all()
+    exercise = []
+    for e in exerciseList:
+        exercise.append({'id': e.id, 'style': e.style, 'time': e.time,})
+    return jsonify(exercise)
 
 '''@app.route('/api/users', methods=['POST'])
 def register_user():
@@ -36,10 +54,11 @@ def register_user():
     response.headers['Location'] = url_for('get_user',id=user.id)
     return response'''
 
-'''@app.route('/api/users/<int:id>/exercise', methods=['GET'])
-def get_exercise(id):
-    user = User.query.get_or_404(id)
-    page = request.args.get('page', 1, type=int)
-    per_page = min(request.args.get('per_page', 10, type=int), 100)
-    data = User.to_collection_dict(user.exercise, page, per_page, get_exercise, id=id)
-    return jsonify(data)'''
+'''@app.route('/api/users/delete/<int:id>', methods=['DELETE'])
+def delete_user(id):
+    user = User.query.get(id)
+    if user is None:
+        return bad_request('Unknown user')
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify(user.to_dict())'''

@@ -1,5 +1,42 @@
+body {
+    color: #000;
+    background-color: #BFDBF7;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+
+/* Navbar built in Bootstrap - colours customised */
+.navbar {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    background-color: #1F7A8C;
+    font-size: 1.3em;
+}
+
+.navbar-default .navbar-nav .active a,
+.navbar-default .navbar-nav .active a:focus,
+.navbar-default .navbar-nav .active a:hover  {
+    color: #FFF;
+    background-color: #022B3A;
+    font-weight: bold;
+}
+
+.navbar-default .navbar-nav li a,
+.navbar-default .navbar-nav li a:focus,
+.navbar-default .navbar-nav li a:hover  {
+    color: #000;
+    background-color: #1F7A8C;
+    font-weight: bold;
+}
+
 h2 {
     font-size: 20px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -13,7 +50,52 @@ h2 {
     border: 2px black solid;
 }
 
-#big {
-    height: 400px;
-    width: 800px;
+table {
+    border: 2px solid black;
+}
+
+th {
+    border: 1px solid black;
+    padding: 15px;
+    text-align: center;
+    background-color: #1F7A8C;
+}
+
+td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+tr:hover {
+    background-color: #A5FFD6;
+    font-weight: bold;
+}
+
+tr:first-child:hover {
+    color: black;
+}
+
+/* Button styles */
+button {
+    background-color: #1F7A8C;
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2)
+}
+
+button:hover {
+    background-color: #A5FFD6;
+    color: black;
+}
+
+button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+canvas {
+    width: 40px;
+    height: 40px;
 }
