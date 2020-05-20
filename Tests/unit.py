@@ -9,6 +9,7 @@ class UserModelTest(unittest.TestCase):
     def setUp(self):
         basedir = os.path.abspath(os.path.dirname(__file__))
         app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///'+os.path.join(basedir,'test.db')
+        app.config['WTF_CSRF_ENABLED'] = False
         # Create virtual environment for test
         self.app = app.test_client()
         db.create_all()
@@ -17,12 +18,32 @@ class UserModelTest(unittest.TestCase):
         db.session.remove()
         db.drop_all()
 
+    # Test user registration
+    def test_user_registration(self):
+        with self.app:
+            response = self.app.post('/register', data=dict(username="Test", email="test@email.com", password="pw", password2="pw"), follow_redirects=True)
+            self.assertIn(b"Congratulations, you are now a registered user!", response.data)
+
+    # Test errors thrown with incorrect user registration
+    def test_incorrect_user_registration(self):
+        u = User(username = "Bob", email="bob@gmail.com")
+        u.set_password("pw")
+        db.session.add(u)
+        db.session.commit()
+        with self.app:
+            response = self.app.post('/register', data=dict(username="Bob", email="bill@gmail.com", password="pw", password2="pw"))
+            self.assertIn(b'Please use a different username.', response.data)
+        
+        with self.app:
+            response = self.app.post('/register', data=dict(username="Bill", email="bob@gmail.com", password="pw", password2="pw"))
+            self.assertIn(b'Please use a different email address.', response.data)
+
     # Test login page loads correctly
     def test_login_page_loads(self):
         response = self.app.get('/login')
         self.assertIn(b'Sign in to the app', response.data)
 
-    # Test user login given credentials
+    # Test user login with correct credentials
     def test_login(self):
         u = User(username = "Test")
         u.set_password("pw")
@@ -32,7 +53,24 @@ class UserModelTest(unittest.TestCase):
             response = self.app.post('/login', data=dict(username="Test", password="pw"), follow_redirects=True)
             self.assertIn(b'Welcome to', response.data)
             self.assertTrue(current_user.username == "Test")
-            #self.assertTrue(current_user.is_active())
+            self.assertFalse(current_user.username == "Wrong" )
+    
+    # Test user login with incorrect credentials
+    def test_invalid_login(self):
+        with self.app:
+            response = self.app.post('/login', data=dict(username="wrong", password="wrongpw"), follow_redirects=True)
+            self.assertIn(b"Invalid username or password", response.data)
+
+    # Test that logging out works
+    def test_logout(self):
+        u = User(username = "Test")
+        u.set_password("pw")
+        db.session.add(u)
+        db.session.commit()
+        with self.app:
+            self.app.post('/login', data=dict(username="Test", password="pw"), follow_redirects=True)
+            response = self.app.get('/logout', follow_redirects=True)
+            self.assertFalse(current_user.is_authenticated)
 
     # Test password hashing and check password functionality
     def test_password_hashing(self):
