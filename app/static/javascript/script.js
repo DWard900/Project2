@@ -80,5 +80,17 @@ function exerciseTable(arr) {
    table += "</table><br>"
    html = header + table
    document.getElementById("exercise-table").innerHTML = html;
-}; 
+};
 
+// User Page - show buttons
+function showDeleteButton() {
+  let elements = document.getElementsByClassName('test')
+  console.log(elements)
+  for (x in elements) {
+    if (x.style.display == "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+}
