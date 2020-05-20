@@ -45,7 +45,6 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-
     def follow(self, user):
         if not self.is_following(user):
             self.followed.append(user)
