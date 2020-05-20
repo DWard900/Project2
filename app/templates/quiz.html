@@ -55,6 +55,24 @@
             {% for error in form.time.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
+            {{ form.date.label }}
+            <br>
+            {{ form.date(cols=32, rows=4) }}<br>
+            {% for error in form.date.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            {{ form.rate_exercise.label }}
+            <br>
+            {{ form.rate_exercise(cols=32, rows=4) }}<br>
+            {% for error in form.rate_exercise.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            {{ form.exercise_comments.label }}
+            <br>
+            {{ form.exercise_comments(cols=32, rows=4) }}<br>
+            {% for error in form.exercise_comments.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
       </form>

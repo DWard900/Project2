@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, ExerciseForm, EmptyForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, ExerciseForm, EmptyForm, SetGoal
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Exercise
 from werkzeug.urls import url_parse
@@ -11,7 +11,7 @@ from datetime import datetime
 @login_required
 def index():
     #Create user data
-    exercise = Exercise.query.all()
+    exercise = current_user.followed_posts().all()
 
     return render_template("index.html", title="Home", exercise = exercise)
 
@@ -128,6 +128,17 @@ def edit_profile():
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile', form=form)
+
+@app.route('/set_goal/<username>', methods=['GET', 'POST'])
+@login_required
+def set_goal(username):
+   form = SetGoal()
+   if form.validate_on_submit():
+       username.goals = form.goals.data
+       db.session.commit()
+       flash('Your changes have been saved.')
+       return redirect(url_for('set_goal'))
+   return render_template('set_goal.html', title='set goal', form=form)
 
 @app.route('/quiz', methods=['GET', 'POST'])
 @login_required
