@@ -10,7 +10,6 @@ from datetime import datetime
 @app.route('/index')
 @login_required
 def index():
-
     #Create user data
     exercise = current_user.followed_posts().all()
 
