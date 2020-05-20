@@ -1,6 +1,8 @@
 from datetime import datetime
 from flask import url_for
+
 from app import db, login, admin
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
@@ -14,7 +16,31 @@ followers = db.Table('followers',
 
 
 
-class User(UserMixin, db.Model):
+# Representing collections of users
+class PaginatedAPIMixin(object):
+    @staticmethod
+    def to_collection_dict(query, page, per_page, endpoint, **kwargs):
+        resources = query.paginate(page, per_page, False)
+        data = {
+            'items': [item.to_dict() for item in resources.items],
+            '_meta': {
+                'page': page,
+                'per_page': per_page,
+                'total_pages': resources.pages,
+                'total_items': resources.total
+            },
+            '_links': {
+                'self': url_for(endpoint, page=page, per_page=per_page,
+                                **kwargs),
+                'next': url_for(endpoint, page=page + 1, per_page=per_page,
+                                **kwargs) if resources.has_next else None,
+                'prev': url_for(endpoint, page=page - 1, per_page=per_page,
+                                **kwargs) if resources.has_prev else None
+            }
+        }
+        return data
+
+class User(PaginatedAPIMixin, UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
@@ -27,11 +53,13 @@ class User(UserMixin, db.Model):
     about_me = db.Column(db.String(140))
     goals = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+
     followed = db.relationship(
         'User', secondary=followers,
         primaryjoin=(followers.c.follower_id == id),
         secondaryjoin=(followers.c.followed_id == id),
         backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
+
 
     #token = db.Column(db.String(32), index=True, unique = True)
     #token_expiration = db.Column(db.DateTime)
@@ -45,6 +73,7 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
 
     def follow(self, user):
         if not self.is_following(user):
@@ -64,6 +93,7 @@ class User(UserMixin, db.Model):
                 followers.c.follower_id == self.id)
         own = Exercise.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Exercise.timestamp.desc())
+
 
 
     '''Token support methods for api
@@ -142,8 +172,8 @@ class Exercise(db.Model):
 def load_user(id):
     return User.query.get(int(id))
 
+
 #Flask Admin View Pages
 admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Exercise, db.session))
-
 
