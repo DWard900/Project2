@@ -21,8 +21,13 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    is_coach = db.Column(db.Boolean, default=False)
+    is_admin = db.Column(db.Boolean, default=False)
+    group = db.Column(db.String, default='A')
+
     exercise = db.relationship('Exercise', backref='user', lazy='dynamic')
     about_me = db.Column(db.String(140))
+    goals = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
     followed = db.relationship(
@@ -118,9 +123,11 @@ class User(UserMixin, db.Model):
 class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     style = db.Column(db.String(140))
-    time = db.Column(db.String(140))
+    time = db.Column(db.String(20))
     distance = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime)
+    rate_exercise = db.Column(db.String(140))
+    exercise_comments = db.Column(db.String(140))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
