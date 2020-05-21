@@ -15,8 +15,8 @@ def get_exercise(userId):
     exerciseList = user.exercise.all()
     exercise = []
     for e in exerciseList:
-        exercise.append({'id': e.id, 'style': e.style, 'time': e.time,
-                        'timestamp': e.timestamp.isoformat() + 'Z'})
+        exercise.append({'id': e.id, 'style': e.style, 'time': e.time, 'distance': e.distance, 
+                        'rate_exercise': e.rate_exercise, 'exercise_comments': e.exercise_comments})
     return jsonify(exercise)
 
 @app.route('/api/users', methods=['GET', 'POST'])
