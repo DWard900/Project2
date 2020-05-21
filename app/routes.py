@@ -134,7 +134,8 @@ def edit_profile():
 def set_goal(username):
    form = SetGoal()
    if form.validate_on_submit():
-       username.goals = form.goals.data
+       user = User.query.filter_by(username=username).first()
+       user.goals = form.goals.data
        db.session.commit()
        flash('Your changes have been saved.')
        return redirect(url_for('set_goal'))

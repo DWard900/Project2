@@ -139,7 +139,10 @@ class Exercise(db.Model):
             'id': self.id,
             'style': self.style,
             'time': self.time,
+            'distance': self.distance,
             'timestamp': self.timestamp.isoformat() + 'Z',
+            'rate_exercise': self.rate_exercise,
+            'exercise_comments': self.exercise_comments
         }
         return data
 
