@@ -11,10 +11,10 @@ from app.api.auth import token_auth, basic_auth
 @app.route('/index')
 @login_required
 def index():
-    #Create user data
+    user = User.query.filter_by(username=current_user.username).first_or_404()
     exercise = current_user.followed_posts().all()
 
-    return render_template("index.html", title="Home", exercise = exercise)
+    return render_template("index.html", title="Home", exercise = exercise, user=user)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -145,6 +145,7 @@ def set_goal(username):
 @app.route('/quiz', methods=['GET', 'POST'])
 @login_required
 def quiz():
+    user = User.query.filter_by(username=current_user.username).first_or_404()
     form = ExerciseForm()
     if form.validate_on_submit():
         exercise = Exercise(style=form.style.data, time=form.time.data, distance=form.distance.data, user=current_user)
@@ -153,7 +154,7 @@ def quiz():
         flash('Thank you for submitting')
         return redirect(url_for('index'))
 
-    return render_template("quiz.html", title="Quiz Page", form=form)
+    return render_template("quiz.html", title="Quiz Page", form=form, user=user)
 
 @app.route('/admin/<username>')
 def admin(username, password):

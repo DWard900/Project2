@@ -95,7 +95,46 @@ button:active {
     transform: translateY(4px);
 }
 
+
+.button-link {
+    background-color: #1F7A8C;
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2)
+}
+
+.button-link:hover {
+    background-color: #A5FFD6;
+    color: black;
+}
+
+.button-link:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
 canvas {
     width: 40px;
     height: 40px;
 }
+
+img {
+    margin: auto;
+    padding: 20px;
+}
+
+.welcome {
+    margin: auto;
+    padding: 20px;
+    border: 4px dashed #022B3A;
+}
+
+.avatar {
+    margin: 50px;
+    border:2px double black;
+    padding: 0px;
+}
+
+
