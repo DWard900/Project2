@@ -156,8 +156,8 @@ def quiz():
     return render_template("quiz.html", title="Quiz Page", form=form)
 
 @app.route('/admin/<username>')
-def admin(username):
-    return render_template('adminview.html', username=username)
+def admin(username, password):
+    return render_template('adminview.html', username=username, password=password)
 
 @app.route('/admin_login', methods=['GET', 'POST'])
 def admin_login():
@@ -169,10 +169,10 @@ def admin_login():
             flash('Invalid username or password')
             return redirect(url_for('index'))
         login_user(user, remember=form.remember_me.data)
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('admin')
-        return None
+        #next_page = request.args.get('next')
+        #if not next_page or url_parse(next_page).netloc != '':
+        #    next_page = url_for('admin')
+        return admin(user, password)
     return render_template('admin_sign_in.html', title='Admin Sign In', form=form)
 
 #delete post

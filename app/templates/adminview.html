@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block body_attrs %} onload="adminSignIn();" {% endblock %}
+{% block body_attrs %} onload="adminSignIn('{{ current_user.username }}:{{ password }}');" {% endblock %}
 {% block content %}
   <div class="container-fluid">
     <div class="col-sm-12 text-center">

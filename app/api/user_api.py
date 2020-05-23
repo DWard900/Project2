@@ -21,7 +21,7 @@ def get_exercise(userId):
     return jsonify(exercise)
 
 @app.route('/api/users', methods=['GET', 'POST'])
-#@token_auth.login_required
+@token_auth.login_required
 def get_user_list():
     userList = User.query.all()
     users = []
@@ -39,7 +39,7 @@ def exercise_graph(userId):
         exercise.append({'id': e.id, 'style': e.style, 'time': e.time,})
     return jsonify(exercise)
 
-'''@app.route('/api/users', methods=['POST'])
+'''@app.route('/api/register_user', methods=['POST'])
 def register_user():
     data = request.get_json() or {}
     if 'id' not in data:
