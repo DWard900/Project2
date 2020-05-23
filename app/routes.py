@@ -5,15 +5,16 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Exercise, Message
 from werkzeug.urls import url_parse
 from datetime import datetime
+from app.api.auth import token_auth, basic_auth
 
 @app.route('/')
 @app.route('/index')
 @login_required
 def index():
-    #Create user data
+    user = User.query.filter_by(username=current_user.username).first_or_404()
     exercise = current_user.followed_posts().all()
 
-    return render_template("index.html", title="Home", exercise = exercise)
+    return render_template("index.html", title="Home", exercise = exercise, user=user)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -43,7 +44,7 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data, email=form.email.data, is_admin=form.admin.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -134,7 +135,8 @@ def edit_profile():
 def set_goal(username):
    form = SetGoal()
    if form.validate_on_submit():
-       username.goals = form.goals.data
+       user = User.query.filter_by(username=username).first()
+       user.goals = form.goals.data
        db.session.commit()
        flash('Your changes have been saved.')
        return redirect(url_for('set_goal'))
@@ -143,6 +145,7 @@ def set_goal(username):
 @app.route('/quiz', methods=['GET', 'POST'])
 @login_required
 def quiz():
+    user = User.query.filter_by(username=current_user.username).first_or_404()
     form = ExerciseForm()
     if form.validate_on_submit():
         exercise = Exercise(style=form.style.data, time=form.time.data, distance=form.distance.data, user=current_user)
@@ -151,13 +154,30 @@ def quiz():
         flash('Thank you for submitting')
         return redirect(url_for('index'))
 
-    return render_template("quiz.html", title="Quiz Page", form=form)
+    return render_template("quiz.html", title="Quiz Page", form=form, user=user)
 
 @app.route('/admin/<username>')
-@login_required
-def admin(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    return render_template('adminview.html', user=user)
+def admin(username, password):
+    return render_template('adminview.html', username=username, password=password)
+
+@app.route('/admin_login', methods=['GET', 'POST'])
+def admin_login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        password = form.password.data
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('index'))
+        if user.is_admin == False:
+            flash('Not an admin user')
+            return redirect(url_for('index'))
+        login_user(user, remember=form.remember_me.data)
+        #next_page = request.args.get('next')
+        #if not next_page or url_parse(next_page).netloc != '':
+        #    next_page = url_for('admin')
+        return admin(user, password)
+    return render_template('admin_sign_in.html', title='Admin Sign In', form=form)
 
 #delete post
 @app.route('/delete_post/<int:exercise_id>', methods= ['POST'])
