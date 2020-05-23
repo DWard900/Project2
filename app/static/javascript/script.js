@@ -1,6 +1,23 @@
 // Admin View
+// HTTP request to token API to get token
+function adminSignIn(data) {
+    const xhttp = new XMLHttpRequest();
+    b64 = btoa(data);
+    xhttp.onreadystatechange = function() { 
+        if (this.readyState == 4 && this.status == 200) {
+          responseData = JSON.parse(this.responseText);
+          console.log(responseData);
+          authToken = responseData['token'];
+          getUsers(authToken);
+        }
+    };
+    xhttp.open("POST", "http://localhost:5000/api/tokens");
+    xhttp.setRequestHeader("Authorization", "Basic " + b64);
+    xhttp.send(data);
+}
+
 // HTTP request to get users
-function getUsers() {
+function getUsers(token) {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { 
         if (this.readyState == 4 && this.status == 200) {
@@ -8,7 +25,9 @@ function getUsers() {
         userTable(myData);
         }
     };
-    xhttp.open("GET", "http://localhost:5000/api/users", true);
+    let bearer = "Bearer " + token;
+    xhttp.open("GET", "http://localhost:5000/api/users");
+    xhttp.setRequestHeader("Authorization", bearer);
     xhttp.send();
 }
 
@@ -86,7 +105,7 @@ function exerciseTable(arr) {
 function showDeleteButton() {
   let elements = document.getElementsByClassName('test')
   console.log(elements)
-  for (x in elements) {
+  for ( let x of elements) {
     if (x.style.display == "none") {
       x.style.display = "block";
     } else {

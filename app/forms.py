@@ -16,6 +16,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    admin = BooleanField('Admin')
     submit = SubmitField('Register')
 
     def validate_username(self, username):
@@ -43,7 +44,7 @@ class ExerciseForm(FlaskForm):
     rating = [('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'),]
     style = SelectField('Enter type of exercise', choices= styles, validators=[DataRequired()])
     distance = FloatField('Enter distance of exercise', validators=[DataRequired()], render_kw={"placeholder": "Distance in KM"})
-    time = FloatField('Enter time', render_kw={"placeholder": "Time in mintues"})
+    time = FloatField('Enter time', render_kw={"placeholder": "Time in minutes"})
     date = DateField()
     rate_exercise = SelectField('How did you feel during your exercise', choices= rating, default=10 )
     exercise_comments = StringField('Comments', render_kw={"placeholder": "I felt this exercise was ...."})
@@ -51,3 +52,9 @@ class ExerciseForm(FlaskForm):
 
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
+
+class MessageForm(FlaskForm):
+    message = TextAreaField(('Message'), validators=[
+        DataRequired(), Length(min=0, max=140)])
+    
+    submit = SubmitField(('Submit'))
