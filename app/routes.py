@@ -176,21 +176,31 @@ def send_message(recipient):
     user = User.query.filter_by(username=recipient).first_or_404()
     form = MessageForm()
     if form.validate_on_submit():
-        msg = Message(author=current_user, recipient=user,
+        msg = Message(author=current_user.username, recipient=user,
                       body=form.message.data)
         db.session.add(msg)
         db.session.commit()
-        flash(_('Your message has been sent.'))
-        return redirect(url_for('main.user', username=recipient))
+        flash('Your message has been sent.')
+        return redirect(url_for('user', username=recipient))
     return render_template('send_message.html', title=('Send Message'),
                            form=form, recipient=recipient)
 
 
-@app.route('/messages')
+# @app.route('/messages')
+# @login_required
+# def messages():
+#     current_user.last_message_read_time = datetime.utcnow()
+#     db.session.commit()
+#     messages = current_user.messages_received.order_by(
+#         Message.timestamp.desc())
+#     return render_template('messages.html', messages=messages)
+
+
+@app.route('/messages/<username>')
 @login_required
-def messages():
-    current_user.last_message_read_time = datetime.utcnow()
-    db.session.commit()
-    messages = current_user.messages_received.order_by(
-        Message.timestamp.desc())
-    return render_template('messages.html', messages=messages)
+def messages(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    messages = Message.query.filter_by(recipient_id=user.id)
+    
+    form = EmptyForm()
+    return render_template('messages.html', messages=messages , form=form)
