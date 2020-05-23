@@ -37,12 +37,28 @@ class User(UserMixin, db.Model):
         secondaryjoin=(followers.c.followed_id == id),
         backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
 
+<<<<<<< HEAD
+    #messgaes
+    messages_sent = db.relationship('Message',
+                                    foreign_keys='Message.sender_id',
+                                    backref='author', lazy='dynamic')
+    messages_received = db.relationship('Message',
+                                        foreign_keys='Message.recipient_id',
+                                        backref='recipient', lazy='dynamic')
+    last_message_read_time = db.Column(db.DateTime)
+
+
+    #token = db.Column(db.String(32), index=True, unique = True)
+    #token_expiration = db.Column(db.DateTime)
+    #admin = db.Column(db.Boolean, default=False)
+=======
     # Token authentication for User API
     token = db.Column(db.String(32), index=True, unique = True)
     token_expiration = db.Column(db.DateTime)
+>>>>>>> master
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '{}'.format(self.username)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -69,7 +85,19 @@ class User(UserMixin, db.Model):
         own = Exercise.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Exercise.timestamp.desc())
 
+<<<<<<< HEAD
+    def new_messages(self):
+        last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
+        return Message.query.filter_by(recipient=self).filter(
+            Message.timestamp > last_read_time).count()
+
+
+
+    '''Token support methods for api
+
+=======
     # Token support methods for User API
+>>>>>>> master
     def get_token(self, expires_in=3600):
         now = datetime.utcnow()
         if self.token and self.token_expiration > now + timedelta(seconds=60):
@@ -147,6 +175,19 @@ class Exercise(db.Model):
 def load_user(id):
     return User.query.get(int(id))
 
+<<<<<<< HEAD
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    body = db.Column(db.String(140))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Message {}>'.format(self.body)
+
+=======
+>>>>>>> master
 #Flask Admin View Pages
 admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Exercise, db.session))
