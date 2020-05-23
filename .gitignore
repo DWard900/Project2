@@ -2,5 +2,5 @@
 .vscode/*
 venv/*
 *.pyc
-app.db
-migrations
+/app.db
+migrations/*
