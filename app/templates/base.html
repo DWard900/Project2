@@ -34,8 +34,9 @@
             <li {% if request.path == url_for('results') %}class="active"{% endif %}><a href="{{ url_for('results') }}">Results page</a></li>
             <li {% if request.path == url_for('groupview') %}class="active"{% endif %}><a href="{{ url_for('groupview') }}">Group view</a></li>
             <li {% if request.path == url_for('user', username=current_user.username) %}class="active"{% endif %}><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
-            <li {% if request.path == url_for('admin', username=current_user.username) %}class="active"{% endif %}><a href="{{ url_for('admin', username=current_user.username) }}">Admin</a></li>
-            <li {% if request.path == url_for('admin_login') %}class="active"{% endif %}><a href="/admin_login">Admin Login test</a></li>
+            {% if current_user.is_admin %}
+            <li {% if request.path == url_for('admin_login') %}class="active"{% endif %}><a href="{{ url_for('admin_login') }}">Admin</a></li>
+            {% endif %}
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}
           </ul>

@@ -39,7 +39,7 @@ def exercise_graph(userId):
         exercise.append({'id': e.id, 'style': e.style, 'time': e.time,})
     return jsonify(exercise)
 
-'''@app.route('/api/register_user', methods=['POST'])
+'''@app.route('/api/users', methods=['POST'])
 def register_user():
     data = request.get_json() or {}
     if 'id' not in data:

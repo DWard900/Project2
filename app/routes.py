@@ -44,7 +44,7 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data, email=form.email.data, is_admin=form.admin.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -167,6 +167,9 @@ def admin_login():
         password = form.password.data
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
+            return redirect(url_for('index'))
+        if user.is_admin == False:
+            flash('Not an admin user')
             return redirect(url_for('index'))
         login_user(user, remember=form.remember_me.data)
         #next_page = request.args.get('next')
