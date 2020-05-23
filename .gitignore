@@ -2,10 +2,5 @@
 .vscode/*
 venv/*
 *.pyc
-<<<<<<< HEAD
 app.db
 migrations
-=======
-/app.db
-migrations/*
->>>>>>> master

@@ -12,7 +12,11 @@
     <div class="col-sm-6 text-center">
       <br>
       <br>
+      {% if current_user == user %}
       <h1 class="welcome">Welcome to your profile page, {{ current_user.username }}!</h1>
+      {% else %}
+      <h1 class="welcome">Welcome to <b>{{ user.username }}'s</b> profile!</h1>
+      {% endif %}
     </div>
     <div class="col-sm-3 text-center">
       <img class="avatar" src="{{ user.avatar(128) }}" alt="User avatar">
@@ -21,24 +25,29 @@
   <div class="row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4 text-center">
-      <h1>Your details</h1>
+      <h1>Details</h1>
+
+      <h2>{{ user.username }}'s current goal is to  {{ user.goals }}</h2>
+
       {% if user.is_coach %}
       <h2>You are a Coach</h2>
       {% endif %}
-
-      {% if current_user.is_coach %}Test{% endif %}
+      
+      {% if current_user.is_coach %}
+      {% if current_user.goal is defined %}
+      <p><a class="button-link" href="{{ url_for('set_goal', username=user.username) }}">Change Goal</a></p>
+      {% else %}
+      <p><a class="button-link" href="{{ url_for('set_goal', username=user.username) }}">Set Goal</a></p>
+      {% endif %}
+      {% endif %}
       
 
       {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
       {% if user.last_seen %}<p>Last seen on: <b>{{ user.last_seen|formatdatetime_long }}</b></p>{% endif %}
       <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
       {% if user == current_user %}
-<<<<<<< HEAD
-      <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
-=======
       <p><a class="button-link" href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
-     
->>>>>>> master
+      
       {% elif not current_user.is_following(user) %}
 
       {% if user != current_user %}
@@ -49,6 +58,7 @@
           </a>
       </p>
       {% endif %}
+      
 
       <p>
           <form action="{{ url_for('follow', username=user.username) }}" method="post">
@@ -69,7 +79,7 @@
   <hr>
   <div class="row">
     <div class="col-sm-6">
-      <button class="btn btn-danger" id='show_delete_btn' onclick="showDeleteButton()"> </button>
+      <button class="btn btn-danger" id='show_delete_btn' onclick="showDeleteButton()">Toggle Delete Exercise</button>
       {% for exercise in exercises %}
         {% include '_exercise.html' %}
       {% endfor %}
