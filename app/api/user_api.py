@@ -2,14 +2,15 @@ from app import app, db
 from app.models import User, Exercise
 from app.api.errors import bad_request, error_response
 from flask import jsonify, url_for, request, g, abort
-#from app.api.auth import token_auth
+from app.api.auth import token_auth
 
 @app.route('/api/users/<int:id>', methods=['GET'])
-#token_auth.login_required
+@token_auth.login_required
 def get_user(id):
     return jsonify(User.query.get_or_404(id).to_dict())
 
 @app.route('/api/users/<int:userId>/exercise', methods=['GET'])
+@token_auth.login_required
 def get_exercise(userId):
     user = User.query.get_or_404(userId)
     exerciseList = user.exercise.all()
@@ -20,12 +21,13 @@ def get_exercise(userId):
     return jsonify(exercise)
 
 @app.route('/api/users', methods=['GET', 'POST'])
+@token_auth.login_required
 def get_user_list():
     userList = User.query.all()
     users = []
     for u in userList:
         users.append({'id': u.id, 'username': u.username, 'about_me': u.about_me,
-                    'last_seen': u.last_seen.isoformat() + 'Z', 'exercise_count': u.exercise.count()})
+                    'last_seen': u.last_seen.strftime("%A, %d %B %Y at %H:%M UTC"), 'exercise_count': u.exercise.count()})
     return jsonify(users)
 
 @app.route('/api/users/<int:userId>/exercise/time_graph', methods=['GET'])
