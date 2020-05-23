@@ -4,18 +4,16 @@ function adminSignIn() {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { 
         if (this.readyState == 4 && this.status == 200) {
-          console.log(this.responseText);
           responseData = JSON.parse(this.responseText);
+          console.log(responseData);
           authToken = responseData['token'];
-          getUsers(authtoken);
+          console.log(authToken);
+          getUsers();
         }
     };
-    xhttp.open("POST", "/api/tokens");
-    xhttp.send();
-}
-
-function getConsole() {
-  console.log("hello");
+    xhttp.open("POST", "http://localhost:5000/api/tokens");
+    xhttp.setRequestHeader("Authorization", "Basic ZWxpc2U6amFzcGVy");
+    xhttp.send("elise:jasper");
 }
 
 // HTTP request to get users
@@ -27,9 +25,9 @@ function getUsers() {
         userTable(myData);
         }
     };
-    //let bearer = "Bearer " + token;
+    let bearer = "Bearer " + "m2WaQXgqlMRWOf8K7NU3p4zSMZIB7QR6";
     xhttp.open("GET", "http://localhost:5000/api/users");
-    //xhttp.setRequestHeader("Authorization", bearer);
+    xhttp.setRequestHeader("Authorization", bearer);
     xhttp.send();
 }
 

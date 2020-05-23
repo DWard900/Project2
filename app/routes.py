@@ -156,10 +156,24 @@ def quiz():
     return render_template("quiz.html", title="Quiz Page", form=form)
 
 @app.route('/admin/<username>')
-@login_required
 def admin(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    return render_template('adminview.html', user=user)
+    return render_template('adminview.html', username=username)
+
+@app.route('/admin_login', methods=['GET', 'POST'])
+def admin_login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        password = form.password.data
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('index'))
+        login_user(user, remember=form.remember_me.data)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('admin')
+        return None
+    return render_template('admin_sign_in.html', title='Admin Sign In', form=form)
 
 #delete post
 @app.route('/delete_post/<int:exercise_id>', methods= ['POST'])
