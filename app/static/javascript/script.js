@@ -1,4 +1,23 @@
 // Admin View
+// HTTP request to token API to get token
+function adminSignIn() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() { 
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+          responseData = JSON.parse(this.responseText);
+          authToken = responseData['token'];
+          getUsers(authtoken);
+        }
+    };
+    xhttp.open("POST", "/api/tokens");
+    xhttp.send();
+}
+
+function getConsole() {
+  console.log("hello");
+}
+
 // HTTP request to get users
 function getUsers() {
     const xhttp = new XMLHttpRequest();
@@ -8,7 +27,9 @@ function getUsers() {
         userTable(myData);
         }
     };
-    xhttp.open("GET", "http://localhost:5000/api/users", true);
+    //let bearer = "Bearer " + token;
+    xhttp.open("GET", "http://localhost:5000/api/users");
+    //xhttp.setRequestHeader("Authorization", bearer);
     xhttp.send();
 }
 

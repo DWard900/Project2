@@ -5,6 +5,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Exercise
 from werkzeug.urls import url_parse
 from datetime import datetime
+from app.api.auth import token_auth, basic_auth
 
 @app.route('/')
 @app.route('/index')

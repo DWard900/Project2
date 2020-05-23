@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
+{% if user == current_user %}
 {% block body_attrs %} onload="getGraph({{ current_user.id }});" {% endblock %}
+{% endif %}
 {% block content %}
   <div class="container-fluid">
     <div class="col-sm-2">
@@ -17,7 +19,7 @@
       
 
       {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-      {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
+      {% if user.last_seen %}<p>Last seen on: {{ user.last_seen|formatdatetime_long }}</p>{% endif %}
       <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
       {% if user == current_user %}
       <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
@@ -47,14 +49,12 @@
         {% include '_exercise.html' %}
       {% endfor %}
     </div>
+    {% if user == current_user %}
     <div class="col-sm-6">
       <h2>Your exercises to-date</h2>
       <canvas id="barChart"></canvas>
     </div>
-    <div class="col-sm-6">
-      <h2>Your exercises to-date</h2>
-      <canvas id="barChart"></canvas>
-    </div>
+    {% endif %}
   </div>
 
 {% endblock %}
