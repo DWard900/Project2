@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import url_for
 
 from app import db, login, admin
@@ -7,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
 from flask_admin.contrib.sqla import ModelView
+import base64, os
 
 #followers DB
 followers = db.Table('followers',
@@ -36,10 +37,9 @@ class User(UserMixin, db.Model):
         secondaryjoin=(followers.c.followed_id == id),
         backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
 
-
-    #token = db.Column(db.String(32), index=True, unique = True)
-    #token_expiration = db.Column(db.DateTime)
-    #admin = db.Column(db.Boolean, default=False)
+    # Token authentication for User API
+    token = db.Column(db.String(32), index=True, unique = True)
+    token_expiration = db.Column(db.DateTime)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -69,10 +69,7 @@ class User(UserMixin, db.Model):
         own = Exercise.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Exercise.timestamp.desc())
 
-
-
-    '''Token support methods for api
-
+    # Token support methods for User API
     def get_token(self, expires_in=3600):
         now = datetime.utcnow()
         if self.token and self.token_expiration > now + timedelta(seconds=60):
@@ -90,7 +87,7 @@ class User(UserMixin, db.Model):
         user = User.query.filter_by(token=token).first()
         if user is None or user.token_expiration < datetime.utcnow():
             return None
-        return user'''
+        return user
 
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
@@ -139,14 +136,16 @@ class Exercise(db.Model):
             'id': self.id,
             'style': self.style,
             'time': self.time,
+            'distance': self.distance,
             'timestamp': self.timestamp.isoformat() + 'Z',
+            'rate_exercise': self.rate_exercise,
+            'exercise_comments': self.exercise_comments
         }
         return data
 
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
-
 
 #Flask Admin View Pages
 admin.add_view(ModelView(User, db.session))

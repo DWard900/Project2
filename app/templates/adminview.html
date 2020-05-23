@@ -1,21 +1,28 @@
 {% extends "base.html" %}
 
-{% block body_attrs %} onload="getUsers();" {% endblock %}
+{% block body_attrs %} onload="adminSignIn('{{ current_user.username }}:{{ password }}');" {% endblock %}
 {% block content %}
-  <div class="container-fluid">
-    <div class="col-sm-12 text-center">
-      <h1>Administrator View</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 text-center">
+      <img src="/static/assets/logo.png" alt="App logo">
     </div>
+    <div class="col-sm-6 text-center">
+      <br>
+      <br>
+      <h1 class="welcome">Administrator view</h1>
+    </div>
+    <div class="col-sm-3"></div>
   </div>
 
-  <div class="container-fluid">
+  <div class="row">
     <div class="col-sm-12">
         <h2>Edit Users</h2>
         <h3>User table</h3>
     </div>
   </div>
 
-  <div class="container-fluid">
+  <div class="row">
     <div class="col-sm-6">
         <br>
         <div id="user-table"></div>
@@ -24,7 +31,6 @@
         <div id="exercise-table"></div>
     </div>
   </div>  
-
-  <div id="jquery"></div>
+</div>
 
 {% endblock %}
