@@ -156,10 +156,6 @@ def quiz():
 
     return render_template("quiz.html", title="Quiz Page", form=form, user=user)
 
-@app.route('/admin/<username>')
-def admin(username, password):
-    return render_template('adminview.html', username=username, password=password)
-
 @app.route('/admin_login', methods=['GET', 'POST'])
 def admin_login():
     form = LoginForm()
@@ -173,10 +169,7 @@ def admin_login():
             flash('Not an admin user')
             return redirect(url_for('index'))
         login_user(user, remember=form.remember_me.data)
-        #next_page = request.args.get('next')
-        #if not next_page or url_parse(next_page).netloc != '':
-        #    next_page = url_for('admin')
-        return admin(user, password)
+        return render_template('adminview.html', username=user, password=password)
     return render_template('admin_sign_in.html', title='Admin Sign In', form=form)
 
 #delete post
@@ -204,16 +197,6 @@ def send_message(recipient):
         return redirect(url_for('user', username=recipient))
     return render_template('send_message.html', title=('Send Message'),
                            form=form, recipient=recipient)
-
-
-# @app.route('/messages')
-# @login_required
-# def messages():
-#     current_user.last_message_read_time = datetime.utcnow()
-#     db.session.commit()
-#     messages = current_user.messages_received.order_by(
-#         Message.timestamp.desc())
-#     return render_template('messages.html', messages=messages)
 
 
 @app.route('/messages/<username>')

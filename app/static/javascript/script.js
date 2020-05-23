@@ -6,7 +6,6 @@ function adminSignIn(data) {
     xhttp.onreadystatechange = function() { 
         if (this.readyState == 4 && this.status == 200) {
           responseData = JSON.parse(this.responseText);
-          console.log(responseData);
           authToken = responseData['token'];
           getUsers(authToken);
         }
