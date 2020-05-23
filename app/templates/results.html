@@ -1,58 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 text-center">
+      <img src="/static/assets/logo.png" alt="App logo">
+    </div>
+    <div class="col-sm-6 text-center">
+      <br>
+      <br>
+      <h1 class="welcome">Your results for [DATE]</h1>
+    </div>
+    <div class="col-sm-3 text-center">
+      <img class="avatar" src="{{ user.avatar(128) }}" alt="User avatar">
+    </div>
+  </div>
+
   <!-- Page title and image -->
-  <div class="container-fluid">
+  <div class="row">
     <div class="col-sm-12 text-center">
-      <h1>Results</h1>
+      <h2>Thank you for posting your exercise!</h2>
+      <h3>Here's a summary of your activity.</h3>
     </div>
   </div>
 
-  <div class="container-fluid">
-    <div class="col-sm-12 text-center">
-        <h2>Your results for [DATE]</h2>
-    </div>
-    <div class="col-sm-6">
-        <h3>[METRIC NAME]</h3>
-        <div class="box">
-            <p>[RESULTS]</p>
+  <div class="row box">
+    <div class="col-sm-4">
+        <h3>You posted a {{ style }}</h3>
+        <div>
+          {% if style == "Run" %}
+          <img src="/static/assets/runningman.png" id="run-image" alt="Image for run">
+          {% elif style == Walk %}
+          <img src="/static/assets/walkingman.png" id="exercise-image" alt="Image for walk">
+          {% endif %}
         </div>
     </div>
-    <div class="col-sm-6">
-      <h3>How you compare</h3>
-      <img src="/static/assets/placeholder.png" alt="Graph placeholder">
-    </div>
-  </div>
+    <div class="col-sm-4">
+      <br>
+      <br>
+      <p>You ran {{ distance }} kilometres</p>
+      <p>You ran for {{ time }} minutes</p>
+      <p>Your speed was .....</p>
+      <p>You rated this exercise a {{ rating }} out of 10</p>
+      <p>Here's what you had to say about the exercise:</p>
+      <p>"{{ comment }}"</p>
 
-  <div class="container-fluid">
-    <div class="col-sm-6">
-      <h3>Your answer to [FREE TEXT QUESTION]</h3>
-      <div class="free-text-box">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt pharetra odio, 
-            in molestie ipsum mollis vel. Morbi eu nunc at enim convallis bibendum at aliquam odio. 
-            Proin tincidunt mauris vel metus tempor pulvinar. Duis in risus blandit erat aliquet ultricies.
-        </p>
-      </div>
     </div>
-    <div class="col-sm-6">
-      <h3>Resources:</h3>
-      <div class="box">
-          <p>[LINK / INFO]</p>
-      </div>
+    <div class="col-sm-4">
+      <h3>To see a list of all your exercises, visit your <a href="{{ url_for('user', username=current_user.username) }}">profile page.</a></h3>
+      <br>
+      <h3>Want to know how you compare with your teammates? Visit the <a href="{{ url_for('groupview') }}">Group view page</a>  for aggregated results.</h3>
     </div>
   </div>
-
-  <div class="container-fluid">
-    <div class="col-sm-6">
-      <h3>[METRIC NAME]</h3>
-        <div class="box">
-          <p>[RESULTS]</p>
-        </div>
-    </div>
-    <div class="col-sm-6">
-      <h3>How you compare</h3>
-        <img src="/static/assets/placeholder.png" alt="Graph placeholder">
-    </div>
-  </div>
+</div>
 
 {% endblock %}

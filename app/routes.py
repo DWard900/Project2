@@ -57,6 +57,25 @@ def register():
 def results():
     return render_template("results.html", title="Results Page")
 
+@app.route('/quiz', methods=['GET', 'POST'])
+@login_required
+def quiz():
+    user = User.query.filter_by(username=current_user.username).first_or_404()
+    form = ExerciseForm()
+    if form.validate_on_submit():
+        exercise = Exercise(style=form.style.data, time=form.time.data, distance=form.distance.data, 
+        rate_exercise=form.rate_exercise.data, exercise_comments=form.exercise_comments.data, user=current_user)
+        db.session.add(exercise)
+        db.session.commit()
+        style = form.style.data
+        time = form.time.data
+        distance = form.distance.data
+        rating=form.rate_exercise.data
+        comment=form.exercise_comments.data
+        return render_template("results.html", title="Results Page", style=style, time=time, distance=distance,
+        rating=rating, comment=comment, user=user)
+    return render_template("quiz.html", title="Quiz Page", form=form, user=user)
+
 @app.route('/groupview')
 @login_required
 def groupview():
@@ -141,20 +160,6 @@ def set_goal(username):
        flash('Your changes have been saved.')
        return redirect(url_for('set_goal'))
    return render_template('set_goal.html', title='set goal', form=form)
-
-@app.route('/quiz', methods=['GET', 'POST'])
-@login_required
-def quiz():
-    user = User.query.filter_by(username=current_user.username).first_or_404()
-    form = ExerciseForm()
-    if form.validate_on_submit():
-        exercise = Exercise(style=form.style.data, time=form.time.data, distance=form.distance.data, user=current_user)
-        db.session.add(exercise)
-        db.session.commit()
-        flash('Thank you for submitting')
-        return redirect(url_for('index'))
-
-    return render_template("quiz.html", title="Quiz Page", form=form, user=user)
 
 @app.route('/admin_login', methods=['GET', 'POST'])
 def admin_login():

@@ -137,4 +137,7 @@ img {
     padding: 0px;
 }
 
-
+#run-image {
+  height: 400px;
+  width: 400px;  
+}
