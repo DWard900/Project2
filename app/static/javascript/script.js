@@ -105,7 +105,7 @@ function exerciseTable(arr) {
 function showDeleteButton() {
   let elements = document.getElementsByClassName('test')
   console.log(elements)
-  for (x in elements) {
+  for ( let x of elements) {
     if (x.style.display == "none") {
       x.style.display = "block";
     } else {
