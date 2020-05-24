@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from flask import url_for
 
 from app import db, login, admin
@@ -80,7 +80,7 @@ class User(UserMixin, db.Model):
         last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
         return Message.query.filter_by(recipient=self).filter(
             Message.timestamp > last_read_time).count()
-            
+
     # Token support methods for User API
     def get_token(self, expires_in=3600):
         now = datetime.utcnow()
@@ -134,6 +134,7 @@ class Exercise(db.Model):
     style = db.Column(db.String(140))
     time = db.Column(db.String(20))
     distance = db.Column(db.String(140))
+    exercise_date = db.Column(db.DateTime)
     timestamp = db.Column(db.DateTime)
     rate_exercise = db.Column(db.String(140))
     exercise_comments = db.Column(db.String(140))

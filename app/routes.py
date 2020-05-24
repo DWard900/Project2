@@ -63,23 +63,30 @@ def quiz():
     user = User.query.filter_by(username=current_user.username).first_or_404()
     form = ExerciseForm()
     if form.validate_on_submit():
-        exercise = Exercise(style=form.style.data, time=form.time.data, distance=form.distance.data, 
+        style = form.style.data
+        time = form.time.data
+        exercise_date = form.date.data
+        distance = form.distance.data
+        mins_per_k = round(form.time.data / form.distance.data, 2)
+        rating=form.rate_exercise.data
+        comment=form.exercise_comments.data
+        exercise = Exercise(style=form.style.data, time=form.time.data, exercise_date=form.date.data, distance=form.distance.data, 
         rate_exercise=form.rate_exercise.data, exercise_comments=form.exercise_comments.data, user=current_user)
         db.session.add(exercise)
         db.session.commit()
-        style = form.style.data
-        time = form.time.data
-        distance = form.distance.data
-        rating=form.rate_exercise.data
-        comment=form.exercise_comments.data
-        return render_template("results.html", title="Results Page", style=style, time=time, distance=distance,
-        rating=rating, comment=comment, user=user)
+        return render_template("results.html", title="Results Page", style=style, time=time, 
+        exercise_date=exercise_date, distance=distance, mins_per_k=mins_per_k, rating=rating, comment=comment, user=user)
     return render_template("quiz.html", title="Quiz Page", form=form, user=user)
 
 @app.route('/groupview')
 @login_required
 def groupview():
     return render_template("groupview.html", title="Group View")
+
+@app.route('/users_page')
+@login_required
+def users_page():
+    return render_template("userview.html", title="All Users")
 
 @app.route('/user/<username>')
 @login_required
@@ -177,16 +184,15 @@ def admin_login():
         return render_template('adminview.html', username=user, password=password)
     return render_template('admin_sign_in.html', title='Admin Sign In', form=form)
 
-#delete post
+# Delete post
 @app.route('/delete_post/<int:exercise_id>', methods= ['POST'])
 @login_required
 def delete_post(exercise_id):
-    #db.session.execute('delete from Exercise WHERE id = %s', [id])
     exercise = Exercise.query.get(exercise_id)
     db.session.delete(exercise)
     db.session.commit()
     flash('Entry was deleted')
-    return redirect('http://127.0.0.1:5000/user/ward')
+    return redirect(url_for('user', username=current_user.username))
 
 @app.route('/send_message/<recipient>', methods=['GET', 'POST'])
 @login_required
