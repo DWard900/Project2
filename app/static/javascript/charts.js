@@ -73,7 +73,7 @@ function exerciseGroupGraph(arr) {
     for (x in arr) {
         user.push(arr[x].username);
     }
-
+    
     ///Creates a unique array of users
     var uniqueusers = [];
     var count = 0;
@@ -104,7 +104,7 @@ function exerciseGroupGraph(arr) {
         }
         counts.push(tally)
     }
-
+    console.log(arr)
     var barChart = new Chart(ctx, {
         type: "bar",
         data: {
