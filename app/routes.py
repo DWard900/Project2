@@ -86,7 +86,8 @@ def groupview():
 @app.route('/users_page')
 @login_required
 def users_page():
-    return render_template("userview.html", title="All Users")
+    users = User.query.all()
+    return render_template("userview.html", title="All Users", users=users)
 
 @app.route('/user/<username>')
 @login_required
@@ -94,7 +95,7 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     exercises = Exercise.query.filter_by(user_id=user.id)
     form = EmptyForm()
-    return render_template('user.html', user=user ,exercises=exercises , form=form)
+    return render_template('user.html', user=user, exercises=exercises, form=form)
 
 @app.route('/follow/<username>', methods=['POST'])
 @login_required

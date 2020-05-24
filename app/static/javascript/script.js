@@ -177,3 +177,4 @@ function deleteExercise(exerciseId) {
   xhttp.open("POST", url, true);
   xhttp.send();
 }
+

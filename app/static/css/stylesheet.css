@@ -192,3 +192,23 @@ img {
     width: 700px;
     overflow: auto;
 }
+
+.user-table {
+    width: 80%;
+}
+
+.table-avatar {
+    width: 25%;
+}
+
+.table-username {
+    width: 25%;
+}
+
+.table-coach {
+    width: 25%;
+}
+
+.table-profile {
+    width: 25%;
+}
