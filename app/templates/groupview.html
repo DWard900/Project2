@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block body_attrs %} 
-onload="fastestRunData(); getGroupGraph();"
+onload="fastestRunData(); getGroupGraph(); exerciseTime();"
 {% endblock %}
 
 {% block content %}
@@ -34,9 +34,7 @@ onload="fastestRunData(); getGroupGraph();"
     </div>
     <div class="col-sm-6">
       <h3>Best team results for [METRIC]</h3>
-      <div class="box">
-          <p>[RESULTS]</p>
-      </div>
+        <canvas id="chart3" width="400" height="200"></canvas>
     </div>
   </div>
 
