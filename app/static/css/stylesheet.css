@@ -137,4 +137,78 @@ img {
     padding: 0px;
 }
 
+#run-image {
+  height: 400px;
+  width: 400px;  
+}
 
+#walk-image {
+    height: 300px;
+    width: 500px;
+}
+
+.results-textbox-1 {
+    background-color: #B892FF;
+    border-radius: 25px;
+    padding: 10px 5px 10px;
+    box-shadow: 10px 10px 5px grey;
+}
+
+.results-textbox-2 {
+    background-color: #1F7A8C;
+    border-radius: 25px;
+    padding: 10px 5px 10px;
+    box-shadow: 10px 10px 5px grey;
+}
+
+.exercise-text {
+    border: 4px dashed #1F7A8C;
+    padding: 0px;
+    margin-right: 100px;
+    font-size: 14px;
+}
+
+#run-small { 
+    height: 70px;
+    width: 60px;
+    padding: 0px;
+    margin: 0px;
+}
+
+#walk-small { 
+    height: 60px;
+    width: 50px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.centred-button {
+    display: block;
+    margin: 0 auto;
+}
+
+#user-exercise-list {
+    height: 800px;
+    width: 700px;
+    overflow: auto;
+}
+
+.user-table {
+    width: 80%;
+}
+
+.table-avatar {
+    width: 25%;
+}
+
+.table-username {
+    width: 25%;
+}
+
+.table-coach {
+    width: 25%;
+}
+
+.table-profile {
+    width: 25%;
+}

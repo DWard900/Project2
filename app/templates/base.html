@@ -20,6 +20,7 @@
     <!-- My scripts -->
     <script src="/static/javascript/script.js"></script>
     <script src="/static/javascript/charts.js"></script>
+    {% block script %}{% endblock %}
     </head>
     <body {% block body_attrs %}{% endblock %}>
       <!-- Navbar in Bootstrap -->
@@ -31,17 +32,13 @@
             <li {% if request.path == url_for('login') %}class="active"{% endif %}><a href="{{ url_for('login') }}">Login</a></li>
             {% else %}
             <li {% if request.path == url_for('quiz') %}class="active"{% endif %}><a href="{{ url_for('quiz') }}">Quiz</a></li>
-            <li {% if request.path == url_for('results') %}class="active"{% endif %}><a href="{{ url_for('results') }}">Results page</a></li>
             <li {% if request.path == url_for('groupview') %}class="active"{% endif %}><a href="{{ url_for('groupview') }}">Group view</a></li>
+            <li {% if request.path == url_for('users_page') %}class="active"{% endif %}><a href="{{ url_for('users_page') }}">All users</a></li>
             <li {% if request.path == url_for('user', username=current_user.username) %}class="active"{% endif %}><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
-<<<<<<< HEAD
-            <li {% if request.path == url_for('admin', username=current_user.username) %}class="active"{% endif %}><a href="{{ url_for('admin', username=current_user.username) }}">Admin</a></li>
-            <li><a href="{{ url_for('messages', username=current_user.username) }}">{{ ('Messages') }}</a></li>
-=======
+            <li {% if request.path == url_for('messages', username=current_user.username) %}class="active"{% endif %}><a href="{{ url_for('messages', username=current_user.username) }}">{{ ('Messages') }}</a></li>
             {% if current_user.is_admin %}
             <li {% if request.path == url_for('admin_login') %}class="active"{% endif %}><a href="{{ url_for('admin_login') }}">Admin</a></li>
             {% endif %}
->>>>>>> master
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %}
           </ul>

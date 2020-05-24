@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% if user == current_user %}
-{% block body_attrs %} onload="getGraph({{ current_user.id }});" {% endblock %}
-{% endif %}
+{% block body_attrs %} onload="getUserExercise({{ user.id }});" {% endblock %}
 {% block content %}
 <div class="container-fluid">
   <div class="row">
@@ -23,22 +21,20 @@
     <div class="col-sm-4 text-center">
       <h1>Your details</h1>
       {% if user.is_coach %}
+      {% if user == current_user %}
       <h2>You are a Coach</h2>
+      {% else %}
+      <h2>{{ user }} is a Coach</h2>
       {% endif %}
-
-      {% if current_user.is_coach %}Test{% endif %}
+      {% endif %}
       
 
       {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
       {% if user.last_seen %}<p>Last seen on: <b>{{ user.last_seen|formatdatetime_long }}</b></p>{% endif %}
       <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
       {% if user == current_user %}
-<<<<<<< HEAD
-      <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
-=======
       <p><a class="button-link" href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
      
->>>>>>> master
       {% elif not current_user.is_following(user) %}
 
       {% if user != current_user %}
@@ -68,15 +64,19 @@
   </div>
   <hr>
   <div class="row">
-    <div class="col-sm-6">
-      <button class="btn btn-danger" id='show_delete_btn' onclick="showDeleteButton()"> </button>
-      {% for exercise in exercises %}
-        {% include '_exercise.html' %}
-      {% endfor %}
+    <div class="col-sm-3">
+      {% if user == current_user %}
+      <button class="btn btn-danger" id='show_delete_btn' onclick="showDeleteButton()">Toggle Delete Exercise</button>
+      {% endif %}
+      <div id="user-exercise-list" class="text-center"></div>
     </div>
+    <div class="col-sm-3"></div>
     {% if user == current_user %}
-    <div class="col-sm-6">
+    <div class="col-sm-6 text-center">
       <h2>Your exercises to-date</h2>
+      <button onclick="getGraph({{ current_user.id }})">See graphs</button>
+      <br>
+      <br>
       <canvas id="barChart"></canvas>
     </div>
     {% endif %}
