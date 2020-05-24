@@ -35,7 +35,9 @@
             <li {% if request.path == url_for('groupview') %}class="active"{% endif %}><a href="{{ url_for('groupview') }}">Group view</a></li>
             <li {% if request.path == url_for('users_page') %}class="active"{% endif %}><a href="{{ url_for('users_page') }}">All users</a></li>
             <li {% if request.path == url_for('user', username=current_user.username) %}class="active"{% endif %}><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
+
             <li {% if request.path == url_for('messages', username=current_user.username) %}class="active"{% endif %}><a href="{{ url_for('messages', username=current_user.username) }}">{{ ('Messages') }}</a></li>
+
             {% if current_user.is_admin %}
             <li {% if request.path == url_for('admin_login') %}class="active"{% endif %}><a href="{{ url_for('admin_login') }}">Admin</a></li>
             {% endif %}

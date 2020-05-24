@@ -35,7 +35,6 @@ class EditProfileForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class SetGoal(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
     goals = TextAreaField('Goals', validators=[Length(min=0, max=500)])
     submit = SubmitField('Submit')
 
