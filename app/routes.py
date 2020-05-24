@@ -57,10 +57,37 @@ def register():
 def results():
     return render_template("results.html", title="Results Page")
 
+@app.route('/quiz', methods=['GET', 'POST'])
+@login_required
+def quiz():
+    user = User.query.filter_by(username=current_user.username).first_or_404()
+    form = ExerciseForm()
+    if form.validate_on_submit():
+        style = form.style.data
+        time = form.time.data
+        exercise_date = form.date.data
+        distance = form.distance.data
+        mins_per_k = round(form.time.data / form.distance.data, 2)
+        rating=form.rate_exercise.data
+        comment=form.exercise_comments.data
+        exercise = Exercise(style=form.style.data, time=form.time.data, exercise_date=form.date.data, distance=form.distance.data, 
+        rate_exercise=form.rate_exercise.data, exercise_comments=form.exercise_comments.data, user=current_user)
+        db.session.add(exercise)
+        db.session.commit()
+        return render_template("results.html", title="Results Page", style=style, time=time, 
+        exercise_date=exercise_date, distance=distance, mins_per_k=mins_per_k, rating=rating, comment=comment, user=user)
+    return render_template("quiz.html", title="Quiz Page", form=form, user=user)
+
 @app.route('/groupview')
 @login_required
 def groupview():
     return render_template("groupview.html", title="Group View")
+
+@app.route('/users_page')
+@login_required
+def users_page():
+    users = User.query.all()
+    return render_template("userview.html", title="All Users", users=users)
 
 @app.route('/user/<username>')
 @login_required
@@ -68,7 +95,7 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     exercises = Exercise.query.filter_by(user_id=user.id)
     form = EmptyForm()
-    return render_template('user.html', user=user ,exercises=exercises , form=form)
+    return render_template('user.html', user=user, exercises=exercises, form=form)
 
 @app.route('/follow/<username>', methods=['POST'])
 @login_required
@@ -142,24 +169,6 @@ def set_goal(username):
        return redirect(url_for('index'))
    return render_template('set_goal.html', title='set goal', form=form)
 
-@app.route('/quiz', methods=['GET', 'POST'])
-@login_required
-def quiz():
-    user = User.query.filter_by(username=current_user.username).first_or_404()
-    form = ExerciseForm()
-    if form.validate_on_submit():
-        exercise = Exercise(style=form.style.data, time=form.time.data, distance=form.distance.data, user=current_user)
-        db.session.add(exercise)
-        db.session.commit()
-        flash('Thank you for submitting')
-        return redirect(url_for('index'))
-
-    return render_template("quiz.html", title="Quiz Page", form=form, user=user)
-
-@app.route('/admin/<username>')
-def admin(username, password):
-    return render_template('adminview.html', username=username, password=password)
-
 @app.route('/admin_login', methods=['GET', 'POST'])
 def admin_login():
     form = LoginForm()
@@ -173,22 +182,18 @@ def admin_login():
             flash('Not an admin user')
             return redirect(url_for('index'))
         login_user(user, remember=form.remember_me.data)
-        #next_page = request.args.get('next')
-        #if not next_page or url_parse(next_page).netloc != '':
-        #    next_page = url_for('admin')
-        return admin(user, password)
+        return render_template('adminview.html', username=user, password=password)
     return render_template('admin_sign_in.html', title='Admin Sign In', form=form)
 
-#delete post
+# Delete post
 @app.route('/delete_post/<int:exercise_id>', methods= ['POST'])
 @login_required
 def delete_post(exercise_id):
-    #db.session.execute('delete from Exercise WHERE id = %s', [id])
     exercise = Exercise.query.get(exercise_id)
     db.session.delete(exercise)
     db.session.commit()
     flash('Entry was deleted')
-    return redirect('http://127.0.0.1:5000/user/ward')
+    return redirect(url_for('user', username=current_user.username))
 
 @app.route('/send_message/<recipient>', methods=['GET', 'POST'])
 @login_required
@@ -204,16 +209,6 @@ def send_message(recipient):
         return redirect(url_for('user', username=recipient))
     return render_template('send_message.html', title=('Send Message'),
                            form=form, recipient=recipient)
-
-
-# @app.route('/messages')
-# @login_required
-# def messages():
-#     current_user.last_message_read_time = datetime.utcnow()
-#     db.session.commit()
-#     messages = current_user.messages_received.order_by(
-#         Message.timestamp.desc())
-#     return render_template('messages.html', messages=messages)
 
 
 @app.route('/messages/<username>')

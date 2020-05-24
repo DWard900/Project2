@@ -22,7 +22,6 @@ function exerciseGraph(arr) {
         style.push(arr[x].style);
         time.push(arr[x].time);
     }
-    console.log(time);
 
     var barChart = new Chart(ctx, {
         type: "bar",

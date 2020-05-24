@@ -16,8 +16,9 @@ def get_exercise(userId):
     exerciseList = user.exercise.all()
     exercise = []
     for e in exerciseList:
-        exercise.append({'id': e.id, 'style': e.style, 'time': e.time, 'distance': e.distance, 
-                        'rate_exercise': e.rate_exercise, 'exercise_comments': e.exercise_comments})
+        exercise.append({'id': e.id, 'style': e.style, 'time': e.time, 'distance': e.distance,
+                        'exercise_date': e.exercise_date.strftime("%A, %d %B %Y"), 'rate_exercise': e.rate_exercise, 
+                        'exercise_comments': e.exercise_comments})
     return jsonify(exercise)
 
 @app.route('/api/users', methods=['GET', 'POST'])
@@ -75,3 +76,4 @@ def delete_user(id):
     db.session.delete(user)
     db.session.commit()
     return jsonify(user.to_dict())'''
+
