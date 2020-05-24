@@ -130,6 +130,7 @@ function exerciseList(arr) {
       let time = arr[x].time;
       let distance = arr[x].distance;
       let date = arr[x].exercise_date;
+      let speed = arr[x].speed;
       let rating = arr[x].rate_exercise;
       let comment = arr[x].exercise_comments;
       let deleteURL = "http://localhost:5000/delete_post/" + exerciseId;
@@ -140,6 +141,7 @@ function exerciseList(arr) {
                       <p><span>' + imgURL + '</span>Type of exercise: <b>' + style + '</b><span>' + imgURL + '</span></p> \
                       <p>Time: <b>' + time + '</b> minutes</p> \
                       <p>Distance: <b>' + distance + '</b> kilometres</p> \
+                      <p>Speed: <b>' + speed + '</b> minutes per kilometre</p> \
                       <p>Your rating: <b>' + rating + '</b> out of 10<p> \
                       <pYour comment: <b>' + comment + '</b></p> \
                       <p><form action ="' + deleteURL + '" method="post", class="del-button" style="display: none;"> \

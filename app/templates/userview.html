@@ -9,7 +9,7 @@
     <div class="col-sm-6 text-center">
       <br>
       <br>
-      <h1 class="welcome">See All Users</h1>
+      <h1 class="welcome">All Users</h1>
     </div>
     <div class="col-sm-3 text-center">
         <img src="/static/assets/logo.png" alt="App logo">
@@ -43,7 +43,7 @@
             {% else %}
             <td style="text-align: center">No</td>
             {% endif %}
-            <td><a class="button-link" href="{{ url_for('user', username=user.username) }}">Link to profile</a></td>
+            <td><a class="button-link" href="{{ url_for('user', username=user.username) }}">Profile</a></td>
             </tr>
             {% endif %}
           {% endfor %}

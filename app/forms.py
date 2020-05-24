@@ -42,7 +42,7 @@ class ExerciseForm(FlaskForm):
     styles = [('Walk','Walk'), ('Run','Run')] #Not sure why this need to be a tuple rather than just a single string?
     rating = [('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10'),]
     style = SelectField('Enter type of exercise', choices= styles, validators=[DataRequired()])
-    distance = FloatField('Enter distance of exercise', validators=[DataRequired()], render_kw={"placeholder": "Distance in KM"})
+    distance = FloatField('Enter distance of exercise', validators=[DataRequired()], render_kw={"placeholder": "Distance in km"})
     time = FloatField('Enter time', render_kw={"placeholder": "Time in minutes"})
     date = DateField()
     rate_exercise = SelectField('How did you feel during your exercise', choices= rating, default=10 )

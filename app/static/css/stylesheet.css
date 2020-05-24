@@ -188,13 +188,13 @@ img {
 }
 
 #user-exercise-list {
-    height: 400px;
+    height: 800px;
     width: 500px;
     overflow: auto;
 }
 
 .user-table {
-    width: 80%;
+    width: 100%;
 }
 
 .table-avatar {
@@ -202,13 +202,18 @@ img {
 }
 
 .table-username {
-    width: 25%;
+    width: 20%;
 }
 
 .table-coach {
-    width: 25%;
+    width: 20%;
 }
 
 .table-profile {
-    width: 25%;
+    width: 30%;
+}
+
+#messages-list {
+    height: 800px;
+    overflow: auto;
 }

@@ -151,7 +151,7 @@ def edit_profile():
         current_user.about_me = form.about_me.data
         db.session.commit()
         flash('Your changes have been saved.')
-        return redirect(url_for('edit_profile'))
+        return redirect(url_for('user', username=current_user.username))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
@@ -201,7 +201,7 @@ def send_message(recipient):
     user = User.query.filter_by(username=recipient).first_or_404()
     form = MessageForm()
     if form.validate_on_submit():
-        msg = Message(author=current_user.username, recipient=user,
+        msg = Message(author=current_user, recipient=user,
                       body=form.message.data)
         db.session.add(msg)
         db.session.commit()
@@ -216,6 +216,5 @@ def send_message(recipient):
 def messages(username):
     user = User.query.filter_by(username=username).first_or_404()
     messages = Message.query.filter_by(recipient_id=user.id)
-    
     form = EmptyForm()
-    return render_template('messages.html', messages=messages , form=form)
+    return render_template('messages.html', messages=messages, form=form)

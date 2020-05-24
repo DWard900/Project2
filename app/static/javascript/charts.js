@@ -6,14 +6,15 @@ function getGraph(userId) {
         if (this.readyState == 4 && this.status == 200) {
         const myData = JSON.parse(this.responseText);
         exerciseGraph(myData);
+        runningSpeedGraph(myData);
         }
     };
-    let url = "http://localhost:5000/api/users/" + userId + "/exercise/time_graph";
+    let url = "http://localhost:5000/api/users/" + userId + "/exercise/graphs";
     xhttp.open("GET", url, true);
     xhttp.send();
   }
 
-// Creates graph for personal profile
+// Creates total exercise graph for personal profile
 function exerciseGraph(arr) {
     let ctx = document.getElementById("barChart").getContext('2d');
     let walktime = 0;
@@ -36,11 +37,19 @@ function exerciseGraph(arr) {
                 }]
         },
         options: {
+            title: {
+                display: true,
+                text: "Your total exercise to-date"
+            },
             legend: {
                 display: false
             },
             scales: {
                 yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Minutes'
+                    },
                     ticks: {
                         beginAtZero: true
                     }
@@ -50,6 +59,53 @@ function exerciseGraph(arr) {
         
     });
 };
+// Creates running speed graph for personal profile
+function runningSpeedGraph(arr) {
+    let ctx = document.getElementById("runningSpeed").getContext('2d');
+    let dates = []
+    let speeds = []
+    for (x in arr) {
+        if (arr[x].style == "Run") {
+            dates.push(arr[x].exercise_date);
+            speeds.push(arr[x].speed);
+        }
+    }
+    dates.sort();
+
+    var lineChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: dates,
+            datasets: [{
+                data: speeds,
+                borderColor: "#1F7A8C",
+                lineTension: 0,
+                }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Your running speed over time"
+            },
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Mins per kilometre'
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            },
+        }
+        
+    });
+};
+
 
 // Creates graph for groups page
 // 
