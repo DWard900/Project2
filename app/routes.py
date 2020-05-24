@@ -166,7 +166,7 @@ def set_goal(username):
        user.goals = form.goals.data
        db.session.commit()
        flash('Your changes have been saved.')
-       return redirect(url_for('set_goal'))
+       return redirect(url_for('index'))
    return render_template('set_goal.html', title='set goal', form=form)
 
 @app.route('/admin_login', methods=['GET', 'POST'])

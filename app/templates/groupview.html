@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block body_attrs %} 
+onload="fastestRunData(); getGroupGraph();"
+{% endblock %}
+
 {% block content %}
   <div class="container-fluid">
     <div class="col-sm-12 text-center">
@@ -10,7 +14,8 @@
   <div class="container-fluid">
     <div class="col-sm-6">
         <h3>Graphical representation of group progress:</h3>
-        <img src="/static/assets/placeholder.png" alt="Graph placeholder">
+        <canvas id="chart" width="400" height="200"></canvas>
+
     </div>
     <div class="col-sm-6">
       <h3>Group information</h3>
@@ -25,9 +30,7 @@
   <div class="container-fluid">
     <div class="col-sm-6">
       <h3>Best team results for [METRIC]</h3>
-      <div class="box">
-          <p>[RESULTS]</p>
-      </div>
+      
     </div>
     <div class="col-sm-6">
       <h3>Best team results for [METRIC]</h3>
@@ -40,9 +43,7 @@
   <div class="container-fluid">
       <div class="col-sm-6">
         <h3>Best team results for [METRIC]</h3>
-        <div class="box">
-            <p>[RESULTS]</p>
-        </div>
+        <canvas id="chart2" width="400" height="200"></canvas>
       </div>
       <div class="col-sm-6">
         <h3>Best team results for [METRIC]</h3>

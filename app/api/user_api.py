@@ -5,11 +5,12 @@ from flask import jsonify, url_for, request, g, abort
 from app.api.auth import token_auth
 
 @app.route('/api/users/<int:id>', methods=['GET'])
-@token_auth.login_required
+##@token_auth.login_required
 def get_user(id):
     return jsonify(User.query.get_or_404(id).to_dict())
 
 @app.route('/api/users/<int:userId>/exercise', methods=['GET'])
+##@token_auth.login_required
 def get_exercise(userId):
     user = User.query.get_or_404(userId)
     exerciseList = user.exercise.all()
@@ -21,7 +22,7 @@ def get_exercise(userId):
     return jsonify(exercise)
 
 @app.route('/api/users', methods=['GET', 'POST'])
-@token_auth.login_required
+##@token_auth.login_required
 def get_user_list():
     userList = User.query.all()
     users = []
@@ -36,8 +37,19 @@ def exercise_graph(userId):
     exerciseList = user.exercise.all()
     exercise = []
     for e in exerciseList:
-        exercise.append({'id': e.id, 'style': e.style, 'time': e.time,})
+        exercise.append({'id': e.id, 'style': e.style, 'time': e.time})
     return jsonify(exercise)
+
+@app.route('/api/users/all/exercise', methods=['GET'])
+def exercise_all():
+    userList = User.query.all()
+    users = []
+    for u in userList:
+        exercises = u.exercise.all()
+        for e in exercises:
+            users.append({'id': u.id, 'username': u.username, 'style': e.style, 'distance':e.distance , 'time': e.time })
+    return jsonify(users)
+
 
 '''@app.route('/api/users', methods=['POST'])
 def register_user():

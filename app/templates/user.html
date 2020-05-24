@@ -10,7 +10,11 @@
     <div class="col-sm-6 text-center">
       <br>
       <br>
+      {% if current_user == user %}
       <h1 class="welcome">Welcome to your profile page, {{ current_user.username }}!</h1>
+      {% else %}
+      <h1 class="welcome">Welcome to <b>{{ user.username }}'s</b> profile!</h1>
+      {% endif %}
     </div>
     <div class="col-sm-3 text-center">
       <img class="avatar" src="{{ user.avatar(128) }}" alt="User avatar">
@@ -19,7 +23,10 @@
   <div class="row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4 text-center">
-      <h1>Your details</h1>
+      <h1>Details</h1>
+
+      <h2>{{ user.username }}'s current goal is to  {{ user.goals }}</h2>
+
       {% if user.is_coach %}
       {% if user == current_user %}
       <h2>You are a Coach</h2>
@@ -27,6 +34,15 @@
       <h2>{{ user }} is a Coach</h2>
       {% endif %}
       {% endif %}
+
+      {% if current_user.is_coach %}
+      {% if current_user.goal is defined %}
+      <p><a class="button-link" href="{{ url_for('set_goal', username=user.username) }}">Change Goal</a></p>
+      {% else %}
+      <p><a class="button-link" href="{{ url_for('set_goal', username=user.username) }}">Set Goal</a></p>
+      {% endif %}
+      {% endif %}
+
       
 
       {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
@@ -34,7 +50,7 @@
       <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
       {% if user == current_user %}
       <p><a class="button-link" href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
-     
+
       {% elif not current_user.is_following(user) %}
 
       {% if user != current_user %}
@@ -45,6 +61,7 @@
           </a>
       </p>
       {% endif %}
+      
 
       <p>
           <form action="{{ url_for('follow', username=user.username) }}" method="post">
