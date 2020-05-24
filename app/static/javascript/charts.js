@@ -16,27 +16,29 @@ function getGraph(userId) {
 // Creates graph
 function exerciseGraph(arr) {
     let ctx = document.getElementById("barChart").getContext('2d');
-    let style = [];
-    let time = [];
+    let walktime = 0;
+    let runtime = 0;
     for (x in arr) {
-        style.push(arr[x].style);
-        time.push(arr[x].time);
+        if (arr[x].style == "Walk") {
+            walktime += parseFloat(arr[x].time);
+        } else if (arr[x].style == "Run") {
+            runtime += parseFloat(arr[x].time);
+        }
     }
 
     var barChart = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: style,
+            labels: ["Run", "Walk"],
             datasets: [{
-                label: "Time",
-                data: time,
-                backgroundColor: [
-                    "#331E36",
-                    "#A5FFD6"
-                ],
-            }]
+                data: [runtime, walktime],
+                backgroundColor: ["#331E36", "#A5FFD6"],
+                }]
         },
         options: {
+            legend: {
+                display: false
+            },
             scales: {
                 yAxes: [{
                     ticks: {

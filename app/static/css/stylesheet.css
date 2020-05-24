@@ -164,7 +164,7 @@ img {
 .exercise-text {
     border: 4px dashed #1F7A8C;
     padding: 0px;
-    margin-right: 100px;
+    margin-right: 50px;
     font-size: 14px;
 }
 
@@ -188,8 +188,8 @@ img {
 }
 
 #user-exercise-list {
-    height: 800px;
-    width: 700px;
+    height: 400px;
+    width: 500px;
     overflow: auto;
 }
 
