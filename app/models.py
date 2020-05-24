@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from flask import url_for
 
 from app import db, login, admin
@@ -14,8 +14,6 @@ followers = db.Table('followers',
     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
 )
-
-
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -37,7 +35,8 @@ class User(UserMixin, db.Model):
         secondaryjoin=(followers.c.followed_id == id),
         backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
 
-    #messages
+
+    # messages
     messages_sent = db.relationship('Message',
                                     foreign_keys='Message.sender_id',
                                     backref='author', lazy='dynamic')
@@ -47,9 +46,11 @@ class User(UserMixin, db.Model):
     last_message_read_time = db.Column(db.DateTime)
 
 
+
     #token = db.Column(db.String(32), index=True, unique = True)
     #token_expiration = db.Column(db.DateTime)
     #admin = db.Column(db.Boolean, default=False)
+
     # Token authentication for User API
     token = db.Column(db.String(32), index=True, unique = True)
     token_expiration = db.Column(db.DateTime)
@@ -140,6 +141,7 @@ class Exercise(db.Model):
     style = db.Column(db.String(140))
     time = db.Column(db.String(20))
     distance = db.Column(db.String(140))
+    exercise_date = db.Column(db.DateTime)
     timestamp = db.Column(db.DateTime)
     rate_exercise = db.Column(db.String(140))
     exercise_comments = db.Column(db.String(140))

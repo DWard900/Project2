@@ -6,7 +6,6 @@ function adminSignIn(data) {
     xhttp.onreadystatechange = function() { 
         if (this.readyState == 4 && this.status == 200) {
           responseData = JSON.parse(this.responseText);
-          console.log(responseData);
           authToken = responseData['token'];
           getUsers(authToken);
         }
@@ -78,7 +77,7 @@ function getExercise(userId) {
       exerciseTable(myData);
       }
   };
-  let url = "http://localhost:5000/api/users/" + userId + "/exercise";
+  let url = "api/users/" + userId + "/exercise";
   xhttp.open("GET", url, true);
   xhttp.send();
 }
@@ -101,10 +100,62 @@ function exerciseTable(arr) {
    document.getElementById("exercise-table").innerHTML = html;
 };
 
+// HTTP request to get exercise on user page
+function getUserExercise(userId) {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() { 
+      if (this.readyState == 4 && this.status == 200) {
+      const myData = JSON.parse(this.responseText);
+      exerciseList(myData);
+      }
+  };
+  let url = "http://127.0.0.1:5000/api/users/" + userId + "/exercise";
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+
+// Creates list of exercises for user page
+function exerciseList(arr) {
+  let header = "<h3>Your exercises</h3><br>";
+  exerciseText = ""
+
+  for (x in arr) {
+      let exerciseId = arr[x].id;
+      let style = arr[x].style;
+      if (style == "Run") {
+        imgURL = "<img src='/static/assets/running-small.png' id='run-small'>"
+      } else {
+        imgURL = "<img src='/static/assets/walk-small.png' id='walk-small'>"
+      }
+      let time = arr[x].time;
+      let distance = arr[x].distance;
+      let date = arr[x].exercise_date;
+      let rating = arr[x].rate_exercise;
+      let comment = arr[x].exercise_comments;
+      let deleteURL = "http://localhost:5000/delete_post/" + exerciseId;
+      
+      exerciseText += '<div class="exercise-text"> \
+                      <br> \
+                      <p>Date: <b>' + date + '</b></p> \
+                      <p><span>' + imgURL + '</span>Type of exercise: <b>' + style + '</b><span>' + imgURL + '</span></p> \
+                      <p>Time: <b>' + time + '</b> minutes</p> \
+                      <p>Distance: <b>' + distance + '</b> kilometres</p> \
+                      <p>Your rating: <b>' + rating + '</b> out of 10<p> \
+                      <pYour comment: <b>' + comment + '</b></p> \
+                      <p><form action ="' + deleteURL + '" method="post", class="del-button" style="display: none;"> \
+                        <input type="submit" value="Delete" class="btn btn-danger"></form></p> \
+                      <br> \
+                      </div> \
+                      <br>'
+   }
+   html = header + exerciseText
+   document.getElementById("user-exercise-list").innerHTML = html;
+};
+
+
 // User Page - show buttons
 function showDeleteButton() {
-  let elements = document.getElementsByClassName('test')
-  console.log(elements)
+  let elements = document.getElementsByClassName('del-button')
   for ( let x of elements) {
     if (x.style.display == "none") {
       x.style.display = "block";
@@ -113,3 +164,17 @@ function showDeleteButton() {
     }
   }
 }
+
+// Delete exercise on user page
+function deleteExercise(exerciseId) {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() { 
+      if (this.readyState == 4 && this.status == 200) {
+        console.log("ready");
+      }
+  };
+  let url = "http://localhost:5000/delete_post/" + exerciseId;
+  xhttp.open("POST", url, true);
+  xhttp.send();
+}
+
