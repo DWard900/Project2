@@ -24,19 +24,11 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-4 text-center">
       <h1>Details</h1>
-      {% if user.goal is defined %}
         {% if user == current_user %}
-        <h2>Your current goal is to  {{ user.goals }}</h2>
+        <p>Your current goal is to:  <b>{{ user.goals }}</b></p>
         {% else %}
-        <h2>{{ user.username }}'s current goal is to  {{ user.goals }}</h2>
+        <p>{{ user.username }}'s current goal is to:  <b>{{ user.goals }}</b></p>
         {% endif %}
-      {% else %}
-        {% if user == current_user %}
-        <p>You do not currently have a goal set</p>
-        {% else %}
-        <p>{{ user.username }} does not have a goal set</p>
-        {% endif %}
-      {% endif %}
 
       {% if user.is_coach %}
       {% if user == current_user %}
@@ -47,11 +39,7 @@
       {% endif %}
 
       {% if current_user.is_coach %}
-      {% if current_user.goal is defined %}
       <p><a class="button-link" href="{{ url_for('set_goal', username=user.username) }}">Change Goal</a></p>
-      {% else %}
-      <p><a class="button-link" href="{{ url_for('set_goal', username=user.username) }}">Set Goal</a></p>
-      {% endif %}
       {% endif %}
 
       
@@ -109,6 +97,9 @@
       <br>
       <br>
       <canvas id="runningSpeed"></canvas>
+      <br>
+      <br>
+      <canvas id="distance"></canvas>
     </div>
     {% endif %}
   </div>

@@ -7,6 +7,7 @@ function getGraph(userId) {
         const myData = JSON.parse(this.responseText);
         exerciseGraph(myData);
         runningSpeedGraph(myData);
+        distanceGraph(myData);
         }
     };
     let url = "http://localhost:5000/api/users/" + userId + "/exercise/graphs";
@@ -59,6 +60,7 @@ function exerciseGraph(arr) {
         
     });
 };
+
 // Creates running speed graph for personal profile
 function runningSpeedGraph(arr) {
     let ctx = document.getElementById("runningSpeed").getContext('2d');
@@ -80,12 +82,13 @@ function runningSpeedGraph(arr) {
                 data: speeds,
                 borderColor: "#1F7A8C",
                 lineTension: 0,
+                fill: false
                 }]
         },
         options: {
             title: {
                 display: true,
-                text: "Minutes per kilometre over time"
+                text: "Minutes per kilometre for runs over time"
             },
             legend: {
                 display: false
@@ -106,6 +109,66 @@ function runningSpeedGraph(arr) {
     });
 };
 
+// Creates total distance graph for personal profile
+function distanceGraph(arr) {
+    let ctx = document.getElementById("distance").getContext('2d');
+    let distanceList = [];
+    for (x in arr) {
+        date = arr[x].exercise_date;
+        if (date in distanceList) {
+            oldDistance = distanceList[date];
+            newDistance = oldDistance + parseFloat(arr[x].distance);
+            distanceList[date] = newDistance;
+        } else {
+            let distance = parseFloat(arr[x].distance)
+            distanceList[date] = distance;
+        }
+    }
+
+    let entries = Object.entries(distanceList);
+    entries.sort();
+    let dateList = [];
+    let distances = [];
+    let total_dist = 0;
+    for (i=0; i < entries.length; i++) {
+        dateList.push(entries[i][0]);
+        total_dist += entries[i][1];
+        distances.push(total_dist);
+    }
+
+    var lineChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: dateList,
+            datasets: [{
+                data: distances,
+                borderColor: "#331E36",
+                lineTension: 0,
+                }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Total cumulative distance of exercises"
+            },
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Distance in km'
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            },
+        }
+        
+    });
+};
 
 // Creates graph for groups page
 // 
@@ -389,12 +452,6 @@ function exerciseTimeGraph(arr) {
         datasets.push(dic)
         }
 
-
-    
-      
-
-    
-    
 
     var barChart = new Chart(ctx, {
         type: "line",

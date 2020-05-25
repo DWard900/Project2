@@ -41,7 +41,7 @@ def exercise_graph(userId):
     exercise = []
     for e in exerciseList:
         mins_per_k = round(float(e.time) / float(e.distance), 2)
-        exercise.append({'id': e.id, 'style': e.style, 'time': e.time, 
+        exercise.append({'id': e.id, 'style': e.style, 'time': e.time, 'distance': e.distance,
         'exercise_date': e.exercise_date.strftime("%Y-%m-%d"), 'speed': mins_per_k})
     return jsonify(exercise)
 
