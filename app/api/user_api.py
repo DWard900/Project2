@@ -52,7 +52,7 @@ def exercise_all():
     for u in userList:
         exercises = u.exercise.all()
         for e in exercises:
-            users.append({'id': u.id, 'username': u.username, 'style': e.style, 'distance':e.distance , 'time': e.time })
+            users.append({'id': u.id, 'username': u.username, 'style': e.style, 'distance':e.distance , 'time': e.time , 'date': e.exercise_date.strftime("%Y-%m-%d") })
     return jsonify(users)
 
 
