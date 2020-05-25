@@ -64,18 +64,10 @@
           </form>
       </p>
       {% endif %}
-<<<<<<< HEAD
-      
-      {% if user != current_user %}
-      <p>
-          <a href="{{ url_for('send_message',
-                              recipient=user.username) }}">
-=======
       {% if user != current_user %}
       <p>
           <a href="{{ url_for('send_message',
                               recipient=user.username) }}", class="button-link">
->>>>>>> master
               {{ ('Send private message') }}
           </a>
       </p>
