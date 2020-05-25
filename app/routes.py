@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, ExerciseForm, EmptyForm, SetGoal, MessageForm
+from app.forms import LoginForm, RegistrationForm, AdminRegistrationForm , EditProfileForm, ExerciseForm, EmptyForm, SetGoal, MessageForm 
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Exercise, Message
 from werkzeug.urls import url_parse
@@ -229,3 +229,36 @@ def delete_message(message_id):
     db.session.commit()
     flash('Message was deleted')
     return redirect(url_for('messages', username=current_user.username))
+
+
+@app.route('/admin_login/add_user', methods=['GET', 'POST'])
+def add_user():
+    form = AdminRegistrationForm()
+    if form.validate_on_submit():
+        
+        user = User(username=form.username.data, email=form.email.data, is_admin=form.admin.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('login'))
+    return render_template('add_user.html', title='Register', form=form)
+
+
+@app.route('/admin_login/delete_user')
+@login_required
+def admin_delete_user():
+    users = User.query.all()
+    return render_template("delete_users.html", title="delete_user", users = users)
+
+@app.route('/delete_user/<username>', methods= ['GET', 'POST'])
+@login_required
+def delete_user(username):
+    users = User.query.all()
+    user = User.query.filter_by(username=username).first_or_404()
+    db.session.delete(user)
+    db.session.commit()
+    users = User.query.all()
+    flash('User was deleted')
+    return redirect(url_for('admin_delete_user', title="delete_user", users=users))
+
+
