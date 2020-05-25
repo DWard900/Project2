@@ -56,3 +56,10 @@ class MessageForm(FlaskForm):
         DataRequired(), Length(min=0, max=800)])
     
     submit = SubmitField(('Submit'))
+
+class AdminRegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    admin = BooleanField()
+    submit = SubmitField('Register')

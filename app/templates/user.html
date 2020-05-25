@@ -47,8 +47,8 @@
       <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
       {% if user == current_user %}
       <p><a class="button-link" href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
-
-      {% elif not current_user.is_following(user) %}    
+ 
+      {% elif not current_user.is_following(user) %}
 
       <p>
           <form action="{{ url_for('follow', username=user.username) }}" method="post">
@@ -64,11 +64,18 @@
           </form>
       </p>
       {% endif %}
+<<<<<<< HEAD
       
       {% if user != current_user %}
       <p>
           <a href="{{ url_for('send_message',
                               recipient=user.username) }}">
+=======
+      {% if user != current_user %}
+      <p>
+          <a href="{{ url_for('send_message',
+                              recipient=user.username) }}", class="button-link">
+>>>>>>> master
               {{ ('Send private message') }}
           </a>
       </p>
