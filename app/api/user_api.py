@@ -3,6 +3,7 @@ from app.models import User, Exercise
 from app.api.errors import bad_request, error_response
 from flask import jsonify, url_for, request, g, abort
 from app.api.auth import token_auth
+from flask_login import login_required
 
 @app.route('/api/users/<int:id>', methods=['GET'])
 ##@token_auth.login_required
@@ -10,7 +11,7 @@ def get_user(id):
     return jsonify(User.query.get_or_404(id).to_dict())
 
 @app.route('/api/users/<int:userId>/exercise', methods=['GET'])
-##@token_auth.login_required
+@token_auth.login_required
 def get_exercise(userId):
     user = User.query.get_or_404(userId)
     exerciseList = user.exercise.all()
@@ -24,7 +25,7 @@ def get_exercise(userId):
     return jsonify(exercise)
 
 @app.route('/api/users', methods=['GET', 'POST'])
-##@token_auth.login_required
+@token_auth.login_required
 def get_user_list():
     userList = User.query.all()
     users = []

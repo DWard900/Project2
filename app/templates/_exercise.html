@@ -1,6 +1,6 @@
 <div class="exercise-text">
   <br>
-  <p>User: {{ exercise.user_id }}</p>
+  <p>User: <b>{{ exercise.user }}</b></p>
   <p>Date: <b>{{ exercise.exercise_date.strftime("%A, %d %B %Y") }}</b></p>
   {% if exercise.style == "Run" %}
   <p><span><img src='/static/assets/running-small.png' id='run-small'></span>Type of exercise: <b>{{ exercise.style }}</b><span><img src='/static/assets/running-small.png' id='run-small'></span></p>
