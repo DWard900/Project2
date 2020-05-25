@@ -32,7 +32,7 @@
 
       {% if user.is_coach %}
         {% if user == current_user %}
-        <h2>You are a Coach</h2>
+        <h2 id="Coachtest">You are a Coach</h2>
         {% else %}
         <h2>{{ user }} is a Coach</h2>
         {% endif %}
@@ -87,7 +87,7 @@
     {% if user == current_user %}
     <div class="col-sm-6 text-center">
       <h2>Your exercise data</h2>
-      <button onclick="getGraph({{ current_user.id }})">See graphs</button>
+      <button onclick="getGraph({{ current_user.id }});">See graphs</button>
       <br>
       <br>
       <canvas id="barChart"></canvas>

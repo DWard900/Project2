@@ -241,14 +241,6 @@ class UserModelTest(unittest.TestCase):
             self.assertIn(b"Not an admin user", response.data)
             self.assertNotIn(b"Administrator view", response.data)
 
-    # Test users can submit exercise to quiz
-    def test_quiz(self):
-        with self.app:
-            self.login("Bob", "pw")
-            response = self.app.post(
-                '/quiz', data=dict(style="Walk", distance="5", time="60", exercise_date="25/05/2020", 
-                rating="9", comment="Test comment"), follow_redirects=True)
-            self.assertIn(b"Your results for Monday, 25 May 2020", response.data)
 
 if __name__=='__main__':
     unittest.main(verbosity=2)
