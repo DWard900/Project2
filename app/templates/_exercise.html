@@ -1,20 +1,15 @@
-<div class="container-fluid">
-  <div class="col-sm-12">
-    <p>
-      <img src="{{ exercise.user.avatar(36) }}">
-      <b>{{ exercise.user.username }}</b>
-      <br> Exercise: <b>{{ exercise.style }}</b> 
-      <br> Time: {{ exercise.time }}
-      {% if user == current_user %}
-      <td>
-        <button class="del-button btn btn-danger" style="display:none;" onclick="deleteAPI('{{ exercise.id }}');">Delete</button>
-        <form action="{{url_for('delete_post', exercise_id=exercise.id)}}"
-         method="post" class = "test" style="display: none;">
-          <input type='submit' value="Delete" class="btn btn-danger">
-        </form>
-        <button class="#" style="display: none;">Delete</button>
-      </td>
-      {% endif %}
-    </p>
-  </div>
+<div class="exercise-text">
+  <br>
+  <p>User: {{ exercise.user_id }}</p>
+  <p>Date: <b>{{ exercise.exercise_date.strftime("%A, %d %B %Y") }}</b></p>
+  {% if exercise.style == "Run" %}
+  <p><span><img src='/static/assets/running-small.png' id='run-small'></span>Type of exercise: <b>{{ exercise.style }}</b><span><img src='/static/assets/running-small.png' id='run-small'></span></p>
+  {% elif exercise.style == "Walk" %}
+  <p><span><img src='/static/assets/walk-small.png' id='walk-small'></span>Type of exercise: <b>{{ exercise.style }}</b><span><img src='/static/assets/walk-small.png' id='walk-small'></span></p>
+  {% endif %}
+  <p>Time: <b>{{ exercise.time }}</b> minutes</p>
+  <p>Distance: <b>{{exercise.distance }}</b></p>
+  <p>Rating: <b>{{ exercise.rate_exercise }}</b> out of 10</p>
+  <p>Comment: {{ exercise.exercise_comments }}</p>
+  <br>
 </div>

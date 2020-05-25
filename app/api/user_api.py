@@ -16,8 +16,10 @@ def get_exercise(userId):
     exerciseList = user.exercise.all()
     exercise = []
     for e in exerciseList:
+        mins_per_k = round(float(e.time) / float(e.distance), 2)
         exercise.append({'id': e.id, 'style': e.style, 'time': e.time, 'distance': e.distance,
-                        'exercise_date': e.exercise_date.strftime("%A, %d %B %Y"), 'rate_exercise': e.rate_exercise, 
+                        'exercise_date': e.exercise_date.strftime("%A, %d %B %Y"), 
+                        'speed': mins_per_k, 'rate_exercise': e.rate_exercise, 
                         'exercise_comments': e.exercise_comments})
     return jsonify(exercise)
 
@@ -31,13 +33,16 @@ def get_user_list():
                     'last_seen': u.last_seen.strftime("%A, %d %B %Y at %H:%M UTC"), 'exercise_count': u.exercise.count()})
     return jsonify(users)
 
-@app.route('/api/users/<int:userId>/exercise/time_graph', methods=['GET'])
+# API to get exercise for one user
+@app.route('/api/users/<int:userId>/exercise/graphs', methods=['GET'])
 def exercise_graph(userId):
     user = User.query.get_or_404(userId)
     exerciseList = user.exercise.all()
     exercise = []
     for e in exerciseList:
-        exercise.append({'id': e.id, 'style': e.style, 'time': e.time})
+        mins_per_k = round(float(e.time) / float(e.distance), 2)
+        exercise.append({'id': e.id, 'style': e.style, 'time': e.time, 
+        'exercise_date': e.exercise_date.strftime("%Y-%m-%d"), 'speed': mins_per_k})
     return jsonify(exercise)
 
 @app.route('/api/users/all/exercise', methods=['GET'])

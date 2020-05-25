@@ -24,8 +24,19 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-4 text-center">
       <h1>Details</h1>
-
-      <h2>{{ user.username }}'s current goal is to  {{ user.goals }}</h2>
+      {% if user.goal is defined %}
+        {% if user == current_user %}
+        <h2>Your current goal is to  {{ user.goals }}</h2>
+        {% else %}
+        <h2>{{ user.username }}'s current goal is to  {{ user.goals }}</h2>
+        {% endif %}
+      {% else %}
+        {% if user == current_user %}
+        <p>You do not currently have a goal set</p>
+        {% else %}
+        <p>{{ user.username }} does not have a goal set</p>
+        {% endif %}
+      {% endif %}
 
       {% if user.is_coach %}
       {% if user == current_user %}
@@ -45,7 +56,7 @@
 
       
 
-      {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+      {% if user.about_me %}<p><b>About me: </b>{{ user.about_me }}</p>{% endif %}
       {% if user.last_seen %}<p>Last seen on: <b>{{ user.last_seen|formatdatetime_long }}</b></p>{% endif %}
       <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
       {% if user == current_user %}
@@ -95,6 +106,9 @@
       <br>
       <br>
       <canvas id="barChart"></canvas>
+      <br>
+      <br>
+      <canvas id="runningSpeed"></canvas>
     </div>
     {% endif %}
   </div>
