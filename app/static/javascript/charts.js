@@ -300,26 +300,40 @@ function exerciseTimeGraph(arr) {
         DistanceData = []
 
         for (i=0;i<uniqueusers.length;i++){
+            console.log(uniqueusers[i])
             counter=0
             userDisArray = [] 
             for (a=0;a<uniquedates.length;a++){
-                for (b=0;i<arr.length;b++){
-                    if (arr[b].date == uniquedates[a]) {
+                for (b=0;b<arr.length;b++){
+                    if (uniquedates[a] == arr[b].date && uniqueusers[i] == arr[b].username ) {
                         counter += parseFloat(arr[b].distance)
                     }
-
                 }
                 userDisArray.push(counter)
-
             }
             DistanceData.push(userDisArray)
         }
+        console.log(DistanceData)
+        
+        colours = ["red","green","yellow","blue","white"];
 
         
-        console.log(DistanceData)
+        datasets = []
+
+        for (i=0;i<uniqueusers.length;i++){
+            dic = {
+                label: uniqueusers[i], 
+                data: DistanceData[i], 
+                borderColor: colours[i],
+                fill: false,
+                lineTension: 0,
+            }
+        datasets.push(dic)
+        }
+
+
     
-        
-        
+      
 
     
     
@@ -327,17 +341,8 @@ function exerciseTimeGraph(arr) {
     var barChart = new Chart(ctx, {
         type: "line",
         data: {
-            labels: user,
-            datasets: [{
-                label: "Mintues per KM",
-                data: data,
-                backgroundColor: [
-                    "#331E36",
-                    "#A5FFD6",
-                    "#331E36",
-                    "#A5FFD6"
-                ],
-            }]
+            labels: uniquedates,
+            datasets: datasets
         },
         options: {
             scales: {
