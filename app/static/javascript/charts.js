@@ -240,16 +240,32 @@ function fastestRunGraph(arr) {
         found = false;
     }
 
+    fastestruns=[]
+
+    ////select fastest
+    for (y = 0; y<uniqueusers.length; y++){
+        fastest = 100000 
+        for (i=0;i<user.length;i++){
+            if ( uniqueusers[y] == user[i]){
+                if ( speed[i] < fastest){
+                    fastest = speed[i]
+                }
+            }
+
+        }
+        fastestruns.push(fastest)
+    }
+
     
     
 
     var barChart = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: user,
+            labels: uniqueusers,
             datasets: [{
-                label: "Mintues per KM",
-                data: speed,
+                label: "Minutes per KM",
+                data: fastestruns,
                 backgroundColor: [
                     "#331E36",
                     "#A5FFD6",
