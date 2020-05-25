@@ -24,55 +24,31 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-4 text-center">
       <h1>Details</h1>
-      {% if user.goal is defined %}
-        {% if user == current_user %}
-        <h2>Your current goal is to  {{ user.goals }}</h2>
-        {% else %}
-        <h2>{{ user.username }}'s current goal is to  {{ user.goals }}</h2>
-        {% endif %}
+      {% if user == current_user %}
+      <p>Your current goal is to:  <b>{{ user.goals }}</b></p>
       {% else %}
-        {% if user == current_user %}
-        <p>You do not currently have a goal set</p>
-        {% else %}
-        <p>{{ user.username }} does not have a goal set</p>
-        {% endif %}
+      <p>{{ user.username }}'s current goal is to:  <b>{{ user.goals }}</b></p>
       {% endif %}
 
       {% if user.is_coach %}
-      {% if user == current_user %}
-      <h2>You are a Coach</h2>
-      {% else %}
-      <h2>{{ user }} is a Coach</h2>
-      {% endif %}
+        {% if user == current_user %}
+        <h2 id="Coachtest">You are a Coach</h2>
+        {% else %}
+        <h2>{{ user }} is a Coach</h2>
+        {% endif %}
       {% endif %}
 
       {% if current_user.is_coach %}
-      {% if current_user.goal is defined %}
       <p><a class="button-link" href="{{ url_for('set_goal', username=user.username) }}">Change Goal</a></p>
-      {% else %}
-      <p><a class="button-link" href="{{ url_for('set_goal', username=user.username) }}">Set Goal</a></p>
       {% endif %}
-      {% endif %}
-
-      
 
       {% if user.about_me %}<p><b>About me: </b>{{ user.about_me }}</p>{% endif %}
       {% if user.last_seen %}<p>Last seen on: <b>{{ user.last_seen|formatdatetime_long }}</b></p>{% endif %}
       <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
       {% if user == current_user %}
       <p><a class="button-link" href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
-
+ 
       {% elif not current_user.is_following(user) %}
-
-      {% if user != current_user %}
-      <p>
-          <a href="{{ url_for('send_message',
-                              recipient=user.username) }}">
-              {{ ('Send private message') }}
-          </a>
-      </p>
-      {% endif %}
-      
 
       <p>
           <form action="{{ url_for('follow', username=user.username) }}" method="post">
@@ -88,6 +64,14 @@
           </form>
       </p>
       {% endif %}
+      {% if user != current_user %}
+      <p>
+          <a href="{{ url_for('send_message',
+                              recipient=user.username) }}", class="button-link">
+              {{ ('Send private message') }}
+          </a>
+      </p>
+      {% endif %}
     </div>
   </div>
   <hr>
@@ -101,14 +85,17 @@
     <div class="col-sm-3"></div>
     {% if user == current_user %}
     <div class="col-sm-6 text-center">
-      <h2>Your exercises to-date</h2>
-      <button onclick="getGraph({{ current_user.id }})">See graphs</button>
+      <h2>Your exercise data</h2>
+      <button onclick="getGraph({{ current_user.id }});">See graphs</button>
       <br>
       <br>
       <canvas id="barChart"></canvas>
       <br>
       <br>
       <canvas id="runningSpeed"></canvas>
+      <br>
+      <br>
+      <canvas id="distance"></canvas>
     </div>
     {% endif %}
   </div>

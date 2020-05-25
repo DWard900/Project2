@@ -6,8 +6,6 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 class UserModelTest(unittest.TestCase):
 
-# Need more unit tests for to_dict in model and more user routes
-
     def setUp(self):
         basedir = os.path.abspath(os.path.dirname(__file__))
         app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///'+os.path.join(basedir,'test.db')
@@ -16,7 +14,7 @@ class UserModelTest(unittest.TestCase):
         # Create virtual environment for test
         self.app = app.test_client()
         db.create_all()
-        user = User(username = "Bob", email="bob@gmail.com")
+        user = User(username = "Bob", email="bob@gmail.com", is_coach=True, is_admin=True)
         user.set_password("pw")
         db.session.add(user)
         db.session.commit()
@@ -56,13 +54,13 @@ class UserModelTest(unittest.TestCase):
     # Test login page loads correctly
     def test_login_page_loads(self):
         response = self.app.get('/login')
-        self.assertIn(b'Sign in to the app', response.data)
+        self.assertIn(b'Sign in below to access the app', response.data)
 
     # Test user login with correct credentials
     def test_login(self):
         with self.app:
             response = self.login("Bob", "pw")
-            self.assertIn(b'Welcome to', response.data)
+            self.assertIn(b'Welcome to FitTrack App, Bob!', response.data)
             self.assertTrue(current_user.username == "Bob")
             self.assertFalse(current_user.username == "Wrong" )
     
@@ -84,8 +82,8 @@ class UserModelTest(unittest.TestCase):
         with self.app:
             self.login("Bob", "pw")
             response = self.app.get('/user/Bob', follow_redirects=True)
-            self.assertIn(b"Bob", response.data)
-            self.assertIn(b"Last seen on", response.data)
+            self.assertIn(b"Welcome to your profile page, Bob", response.data)
+            self.assertIn(b"Your exercise data", response.data)
 
     # Test password hashing and check password functionality
     def test_password_hashing(self):
@@ -166,41 +164,83 @@ class UserModelTest(unittest.TestCase):
             self.login("Bob", "pw")
             response = self.app.post('/edit_profile', data=dict(username="Bob", about_me="All about Bob"), follow_redirects=True)
             self.assertIn(b"Your changes have been saved", response.data)
+            self.assertIn(b"All about Bob", response.data)
 
-    '''# Test set goal functionality
+    # Test set goal functionality
     def test_set_goal(self):
         with self.app:
             self.login("Bob", "pw")
-            response = self.app.post('/set_goal/Bob', data=dict(username="Bob", goals="Bob's goals"), follow_redirects=True)
+            # Check coach user can see "Change Goal" button on profile
+            response = self.app.get('/user/Bob', follow_redirects=True)
+            self.assertIn(b"Change Goal", response.data)
+            # Check user can change own goal
+            response = self.app.post('/set_goal/Bob', data=dict(username="Bob", goals="This is a test goal"), follow_redirects=True)
             self.assertIn(b"Your changes have been saved", response.data)
-            # URL_for not redirecting
-            # Then check user goals in database'''
+            # Check goal appears on user page
+            response = self.app.get('/user/Bob', follow_redirects=True)
+            self.assertIn(b"This is a test goal", response.data)
 
-    '''# Test quiz submission and adding to database
-    def test_quiz(self):
+        # Check user can change another person's goals
+        u1 = User(username='elise', email='elise@example.com')
+        db.session.add(u1)
+        db.session.commit()
+        with self.app:
+            response = self.app.get('/user/elise', follow_redirects=True)
+            self.assertIn(b"Change Goal", response.data)
+            response = self.app.post('/set_goal/elise', data=dict(username="elise", goals="This is another test goal"), follow_redirects=True)
+            self.assertIn(b"Your changes have been saved", response.data)
+            # Check goal appears on user page
+            response = self.app.get('/user/elise', follow_redirects=True)
+            self.assertIn(b"This is another test goal", response.data)
+
+    # Test messages functionality
+    def test_messages(self):
         with self.app:
             self.login("Bob", "pw")
-            response = self.app.post(
-                '/quiz', data=dict(style="Walk", distance="5", time="60", date="21/05/2020", rate_exercise="9",
-                exercise_comments="Bob's comment"), follow_redirects=True)
-            self.assertIn(b"Thank you for submitting", response.data)'''
+            # Test Messages page loads
+            response = self.app.get('/messages/Bob', follow_redirects=True)
+            self.assertIn(b"Messages", response.data)
 
-    
-    # Test deleting an exercise
-    #def test_delete_exercise(self):
+        # Test send message functionality
+        u1 = User(username='elise', email='elise@example.com')
+        u1.set_password("password")
+        db.session.add(u1)
+        db.session.commit()
+        with self.app:
+            response = self.app.get('/user/elise', follow_redirects=True)
+            response = self.app.post('/send_message/elise', data=dict(username="elise", message="Message from Bob to Elise"), follow_redirects=True)
+            self.assertIn(b"Your message has been sent", response.data)
 
+        # Test messages received
+        with self.app:
+            self.login("elise", "password")
+            response = self.app.get('/messages/elise', follow_redirects=True)
+            self.assertIn(b"Message from Bob to Elise", response.data)
+            # Test delete messages
+            response = self.app.post('/delete_message/1', follow_redirects=True)
+            self.assertNotIn(b"Message from Bob to Elise", response.data)
 
-    # Test user APIs
+    # Test admin login
+    def test_admin(self):
+        # User is admin
+        with self.app:
+            self.login("Bob", "pw")
+            response = self.app.post('/admin_login', data=dict(username="Bob", password="pw"), 
+            follow_redirects=True)
+            self.assertIn(b"Administrator view", response.data)
 
-    # Test dictionary method for user works
-    #def test_user_json(self, include_email=True):
-    #    u = User(username = "Test", email="test@email.com", about_me="About test", last_seen=now, exercise_count=3)
-    #    db.session.add(u)
-    #    db.session.commit()
-    #    with self.app:
-    #        response = self.app.get post('/login', data=dict(username="Test", password="pw"), follow_redirects=True)
-    #        response = self.app.get('/logout', follow_redirects=True)
-    #        self.assertFalse(current_user.is_authenticated)
+        # If user is not admin
+        u1 = User(username='elise', email='elise@example.com')
+        u1.set_password("password")
+        db.session.add(u1)
+        db.session.commit()
+        with self.app:
+            self.login("elise", "password")
+            response = self.app.post('/admin_login', data=dict(username="elise", password="password"), 
+            follow_redirects=True)
+            self.assertIn(b"Not an admin user", response.data)
+            self.assertNotIn(b"Administrator view", response.data)
+
 
 if __name__=='__main__':
     unittest.main(verbosity=2)

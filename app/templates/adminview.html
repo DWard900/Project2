@@ -10,9 +10,15 @@
     <div class="col-sm-6 text-center">
       <br>
       <br>
-      <h1 class="welcome">Administrator view</h1>
+      <h1 class="welcome" id="Admintest">Administrator view</h1>
     </div>
     <div class="col-sm-3"></div>
+  </div>
+
+  <div>
+    <a href="{{ url_for('add_user') }}" class="button-link">Add User</a>
+    <a href="{{ url_for('admin_delete_user') }}" class="button-link"> Delete User</a>
+
   </div>
 
   <div class="row">

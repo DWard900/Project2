@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, ExerciseForm, EmptyForm, SetGoal, MessageForm
+from app.forms import LoginForm, RegistrationForm, AdminRegistrationForm , EditProfileForm, ExerciseForm, EmptyForm, SetGoal, MessageForm 
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Exercise, Message
 from werkzeug.urls import url_parse
@@ -52,6 +52,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
+# Results page after quiz is posted
 @app.route('/results')
 @login_required
 def results():
@@ -78,11 +79,13 @@ def quiz():
         exercise_date=exercise_date, distance=distance, mins_per_k=mins_per_k, rating=rating, comment=comment, user=user)
     return render_template("quiz.html", title="Quiz Page", form=form, user=user)
 
+# Group view page
 @app.route('/groupview')
 @login_required
 def groupview():
     return render_template("groupview.html", title="Group View")
 
+# All users page
 @app.route('/users_page')
 @login_required
 def users_page():
@@ -90,6 +93,7 @@ def users_page():
     followed_posts = current_user.followed_posts().all()
     return render_template("userview.html", title="All Users", users=users, followed_posts=followed_posts)
 
+# User profile
 @app.route('/user/<username>')
 @login_required
 def user(username):
@@ -98,6 +102,7 @@ def user(username):
     form = EmptyForm()
     return render_template('user.html', user=user, exercises=exercises, form=form)
 
+# Follow a user
 @app.route('/follow/<username>', methods=['POST'])
 @login_required
 def follow(username):
@@ -117,7 +122,7 @@ def follow(username):
     else:
         return redirect(url_for('index'))
 
-
+# Unfollow a user
 @app.route('/unfollow/<username>', methods=['POST'])
 @login_required
 def unfollow(username):
@@ -143,6 +148,7 @@ def before_request():
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
 
+# Edit profile button on user page
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
@@ -158,6 +164,7 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile', form=form)
 
+# Set/change goal
 @app.route('/set_goal/<username>', methods=['GET', 'POST'])
 @login_required
 def set_goal(username):
@@ -170,6 +177,7 @@ def set_goal(username):
        return redirect(url_for('index'))
    return render_template('set_goal.html', title='set goal', form=form)
 
+# Admin login screen
 @app.route('/admin_login', methods=['GET', 'POST'])
 def admin_login():
     form = LoginForm()
@@ -196,6 +204,7 @@ def delete_post(exercise_id):
     flash('Entry was deleted')
     return redirect(url_for('user', username=current_user.username))
 
+# Send message to user
 @app.route('/send_message/<recipient>', methods=['GET', 'POST'])
 @login_required
 def send_message(recipient):
@@ -211,7 +220,7 @@ def send_message(recipient):
     return render_template('send_message.html', title=('Send Message'),
                            form=form, recipient=recipient)
 
-
+# See all messages
 @app.route('/messages/<username>')
 @login_required
 def messages(username):
@@ -229,3 +238,36 @@ def delete_message(message_id):
     db.session.commit()
     flash('Message was deleted')
     return redirect(url_for('messages', username=current_user.username))
+
+# Add a user on admin view
+@app.route('/admin_login/add_user', methods=['GET', 'POST'])
+def add_user():
+    form = AdminRegistrationForm()
+    if form.validate_on_submit():
+        
+        user = User(username=form.username.data, email=form.email.data, is_admin=form.admin.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('login'))
+    return render_template('add_user.html', title='Register', form=form)
+
+# Delete a user on admin view
+@app.route('/admin_login/delete_user')
+@login_required
+def admin_delete_user():
+    users = User.query.all()
+    return render_template("delete_users.html", title="delete_user", users = users)
+
+@app.route('/delete_user/<username>', methods= ['GET', 'POST'])
+@login_required
+def delete_user(username):
+    users = User.query.all()
+    user = User.query.filter_by(username=username).first_or_404()
+    db.session.delete(user)
+    db.session.commit()
+    users = User.query.all()
+    flash('User was deleted')
+    return redirect(url_for('admin_delete_user', title="delete_user", users=users))
+
+
