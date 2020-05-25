@@ -225,6 +225,15 @@ function exerciseGroupGraph(arr) {
         counts.push(tally)
     }
 
+    var backgroundColors = [];
+    for (i=0;i<uniqueusers.length;i++){
+        if (i % 2 === 0) {
+            backgroundColors.push("#331E36")
+        } else {
+            backgroundColors.push("#A5FFD6")
+        }
+    }
+
     var barChart = new Chart(ctx, {
         type: "bar",
         data: {
@@ -232,19 +241,22 @@ function exerciseGroupGraph(arr) {
             datasets: [{
                 label: "Number of Exercises",
                 data: counts,
-                backgroundColor: [
-                    "#331E36",
-                    "#A5FFD6",
-                    "#331E36",
-                    "#A5FFD6"
-                ],
+                backgroundColor: backgroundColors
             }]
         },
         options: {
+            legend: {
+                display: false
+            },
             scales: {
                 yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Number of exercises'
+                    },
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        callback: function(value) {if (value % 1 === 0) {return value;}}
                     }
                 }]
             }
@@ -303,15 +315,12 @@ function fastestRunGraph(arr) {
         found = false;
     }
 
-    
-    
-
     var barChart = new Chart(ctx, {
         type: "bar",
         data: {
             labels: user,
             datasets: [{
-                label: "Mintues per KM",
+                label: "Minutes per km",
                 data: speed,
                 backgroundColor: [
                     "#331E36",
@@ -322,8 +331,15 @@ function fastestRunGraph(arr) {
             }]
         },
         options: {
+            legend: {
+                display: false
+            },
             scales: {
                 yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Mins per kilometre'
+                    },
                     ticks: {
                         beginAtZero: true
                     }
@@ -389,7 +405,6 @@ function exerciseTimeGraph(arr) {
                 temp = []
                 temp.push(arr[b].date)
                 dates.push(arr[b].date)
-                ///temp.push(arr[b].time)
                 temp.push(arr[b].distance)
                 userdata.push(temp)
                 }
@@ -462,6 +477,10 @@ function exerciseTimeGraph(arr) {
         options: {
             scales: {
                 yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Distance in km'
+                    },
                     ticks: {
                         beginAtZero: true
                     }

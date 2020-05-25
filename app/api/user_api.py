@@ -45,6 +45,7 @@ def exercise_graph(userId):
         'exercise_date': e.exercise_date.strftime("%Y-%m-%d"), 'speed': mins_per_k})
     return jsonify(exercise)
 
+# API to get exercise for all users
 @app.route('/api/users/all/exercise', methods=['GET'])
 def exercise_all():
     userList = User.query.all()

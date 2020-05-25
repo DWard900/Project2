@@ -5,51 +5,67 @@ onload="fastestRunData(); getGroupGraph(); exerciseTime();"
 {% endblock %}
 
 {% block content %}
-  <div class="container-fluid">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 text-center">
+      <img src="/static/assets/logo.png" alt="App logo">
+    </div>
+    <div class="col-sm-6 text-center">
+      <br>
+      <br>
+      <h1 class="welcome">Group view</h1>
+    </div>
+    <div class="col-sm-3 text-center">
+        <img src="/static/assets/logo.png" alt="App logo">
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-sm-12 text-center">
-      <h1>Group view</h1>
+      <h2>Welcome to the Group View page!</h2>
+      <p>Here you can see a summary of your team's progress and compare where you sit.</p>
     </div>
   </div>
+  <hr>
 
-  <div class="container-fluid">
+  <div class="row">
     <div class="col-sm-6">
-        <h3>Graphical representation of group progress:</h3>
+        <h3>Here's how many exercises your team members have posted:</h3>
         <canvas id="chart" width="400" height="200"></canvas>
-
     </div>
-    <div class="col-sm-6">
-      <h3>Group information</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt pharetra odio, 
-          in molestie ipsum mollis vel. Morbi eu nunc at enim convallis bibendum at aliquam odio.</p>
-      <div class="box">
-          <p>[SUMMARY STATS OF GROUP]</p>
-      </div>
+    <div class="col-sm-6 text-center">
+      <br>
+      <br>
+      <br>
+      <br>
+      <img src="/static/assets/runners.png" alt="Runners" id="runners-img">
     </div>
   </div>
-
-  <div class="container-fluid">
-    <div class="col-sm-6">
-      <h3>Best team results for [METRIC]</h3>
-      
+  <br>
+  <div class="row">
+    <div class="col-sm-6 text-center">
+      <img src="/static/assets/runners2.png" alt="Runners" id="runners2-img">
     </div>
     <div class="col-sm-6">
-      <h3>Best team results for [METRIC]</h3>
+      <h3>Here's how many kilometres your team members have racked up to-date:</h3>
         <canvas id="chart3" width="400" height="200"></canvas>
     </div>
   </div>
-
-  <div class="container-fluid">
+  <br>
+  <div class="row">
       <div class="col-sm-6">
-        <h3>Best team results for [METRIC]</h3>
+        <h3>Here are the fastest exercises your team members have posted:</h3>
         <canvas id="chart2" width="400" height="200"></canvas>
       </div>
-      <div class="col-sm-6">
-        <h3>Best team results for [METRIC]</h3>
-        <div class="box">
-            <p>[RESULTS]</p>
-        </div>
+      <div class="col-sm-6 text-center">
+        <br>
+        <br>
+        <br>
+        <br>
+        <img src="/static/assets/runners3.png" alt="Runners" id="runners3-img">
       </div>
   </div>
+</div>
   
 
 {% endblock %}

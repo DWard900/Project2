@@ -217,3 +217,21 @@ img {
     height: 800px;
     overflow: auto;
 }
+
+#runners-img {
+    height: 300px;
+    width: 400px;  
+    margin: auto;
+}
+
+#runners2-img {
+    height: 400px;
+    width: 600px;  
+    margin: auto;
+}
+
+#runners3-img {
+    height: 300px;
+    width: 400px;  
+    margin: auto;
+}
