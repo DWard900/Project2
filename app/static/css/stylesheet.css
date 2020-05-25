@@ -5,7 +5,6 @@ body {
     font-size: 16px;
 }
 
-
 /* Navbar built in Bootstrap - colours customised */
 .navbar {
     margin-bottom: 0;
@@ -30,6 +29,7 @@ body {
     font-weight: bold;
 }
 
+/* Headings */
 h2 {
     font-size: 20px;
     font-weight: bold;
@@ -40,10 +40,12 @@ h3 {
     font-weight: bold;
 }
 
+/* Bootstrap containers */
 .container-fluid {
     margin: 20px;
 }
 
+/* Bootstrap containers*/
 .box {
     padding: 50px;
     margin: auto;
@@ -95,7 +97,7 @@ button:active {
     transform: translateY(4px);
 }
 
-
+/* Links to look like buttons */
 .button-link {
     background-color: #1F7A8C;
     color: white;
@@ -115,28 +117,33 @@ button:active {
     transform: translateY(4px);
 }
 
+/* Canvas styling for charts */
 canvas {
     width: 40px;
     height: 40px;
 }
 
+/* All images */
 img {
     margin: auto;
     padding: 20px;
 }
 
+/* Headers at tops of pages */
 .welcome {
     margin: auto;
     padding: 20px;
     border: 4px dashed #022B3A;
 }
 
+/* User avatar in headers */
 .avatar {
     margin: 50px;
     border:2px double black;
     padding: 0px;
 }
 
+/* Images on results page after quiz submission */
 #run-image {
   height: 400px;
   width: 400px;  
@@ -147,6 +154,7 @@ img {
     width: 500px;
 }
 
+/* Textboxes on results page */
 .results-textbox-1 {
     background-color: #B892FF;
     border-radius: 25px;
@@ -161,6 +169,7 @@ img {
     box-shadow: 10px 10px 5px grey;
 }
 
+/* Exercise textboxes on user page */
 .exercise-text {
     border: 4px dashed #1F7A8C;
     padding: 0px;
@@ -168,6 +177,7 @@ img {
     font-size: 14px;
 }
 
+/* Small images for exercise textboxes */
 #run-small { 
     height: 70px;
     width: 60px;
@@ -182,13 +192,15 @@ img {
     margin: 0px;
 }
 
+/* Delete buttons on user page */
 .centred-button {
     display: block;
     margin: 0 auto;
 }
 
+/* Exercise list on user page with scroll bar */
 #user-exercise-list {
-    height: 800px;
+    height: 1000px;
     width: 500px;
     overflow: auto;
 }
@@ -213,7 +225,26 @@ img {
     width: 30%;
 }
 
+/* Messages list with scroll bar */
 #messages-list {
     height: 800px;
     overflow: auto;
+}
+
+#runners-img {
+    height: 300px;
+    width: 400px;  
+    margin: auto;
+}
+
+#runners2-img {
+    height: 400px;
+    width: 600px;  
+    margin: auto;
+}
+
+#runners3-img {
+    height: 300px;
+    width: 400px;  
+    margin: auto;
 }

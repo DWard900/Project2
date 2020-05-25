@@ -22,11 +22,10 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     is_coach = db.Column(db.Boolean, default=False)
     is_admin = db.Column(db.Boolean, default=False)
-    group = db.Column(db.String, default='A')
 
     exercise = db.relationship('Exercise', backref='user', lazy='dynamic')
     about_me = db.Column(db.String(140))
-    goals = db.Column(db.String(140))
+    goals = db.Column(db.String(140), default="Exercise more")
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
     followed = db.relationship(

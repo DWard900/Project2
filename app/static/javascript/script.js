@@ -116,7 +116,7 @@ function getUserExercise(userId) {
 
 // Creates list of exercises for user page
 function exerciseList(arr) {
-  let header = "<h3>Your exercises</h3><br>";
+  let header = "<h3>Exercises</h3><br>";
   exerciseText = ""
 
   for (x in arr) {
