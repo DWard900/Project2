@@ -5,5 +5,10 @@
         <br><b>Sent on: </b>{{ message.timestamp|formatdatetime_long  }}
         <br><b>From: </b>{{ message.author}}
       </p>
+      <p>
+        <form action ="http://localhost:5000/delete_message/{{ message.id }}" method="post" class="del-button" style="display: none;">
+          <input type="submit" value="Delete" class="btn btn-danger">
+        </form>
+      </p>
     </div>
   </div>

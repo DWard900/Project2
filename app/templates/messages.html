@@ -3,16 +3,28 @@
 {% block content %}
   <div class="container-fluid">
     <div class="row" >
-      <div class="col-sm-12 text-center">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3 text-center">
         <h1>{{ ('Messages') }}</h1>
-        <hr>
+      </div>
+      <div class="col-sm-3 text-center">
+        <br>
+        <button class="btn btn-danger" id='show_delete_btn' onclick="showDeleteButton()">Toggle Delete Messages</button>
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 text-center">
         <div class="text-center", id="messages-list">
         {% for message in messages %}
           {% include '_messages.html' %}
         {% endfor %}
         </div>
       </div>
+      <div class="col-sm-3"></div>
     </div>
-
+    </div>
   </div>
 {% endblock %}
