@@ -86,14 +86,15 @@ function getExercise(userId) {
 function exerciseTable(arr) {
   let header = "<h3>User exercise</h3><br>";
 
-  let table = "<br><table><tr><th>Exercise ID</th><th>Type</th><th>Time</th><th>Timestamp</th></tr>";
+  let table = "<br><table><tr><th>Exercise ID</th><th>Type</th><th>Time</th><th>Distance</th><th>Date</th></tr>";
 
   for (x in arr) {
       let exerciseId = arr[x].id;
       let style = arr[x].style;
       let time = arr[x].time;
-      let timestamp = arr[x].timestamp
-      table += "<tr><td>" + exerciseId + "</td><td>" + style + "</td><td>" + time + "</td><td>" + timestamp + "</td></tr>";
+      let distance = arr[x].distance
+      let exercise_date = arr[x].exercise_date
+      table += "<tr><td>" + exerciseId + "</td><td>" + style + "</td><td>" + time + "</td><td>" + distance + "</td><td>" + exercise_date + "</td></tr>";
    }
    table += "</table><br>"
    html = header + table

@@ -14,14 +14,10 @@
       </div>
       <div class="col-sm-3"></div>
     </div>
-</div>
 
 
-<div class="row">
-    <div class="col-sm-12 text-center">
-      <h2>Search for users here, view profiles and follow users you would like to see more of.</h2>
-    </div>
-  </div>
+
+
   <hr>
   <div class="row">
     <div class="col-sm-6 text-center">
@@ -50,17 +46,6 @@
           {% endfor %}
       </table>
     </div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-6 text-center" id="user-exercise-list">
-      <h3>Latest updates from your followed users:</h3>
-      <br>
-      {% for exercise in followed_posts %}
-        {% if exercise.user_id != current_user.id %}
-          {% include '_exercise.html' %}
-        {% endif %}
-      {% endfor %}
-      </div>
-      <div class="col-sm-1"></div>
   </div>
 </div>
 
