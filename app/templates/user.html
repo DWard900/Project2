@@ -56,7 +56,7 @@
 
       
 
-      {% if user.about_me %}<p><b>About me:</b>{{ user.about_me }}</p>{% endif %}
+      {% if user.about_me %}<p><b>About me: </b>{{ user.about_me }}</p>{% endif %}
       {% if user.last_seen %}<p>Last seen on: <b>{{ user.last_seen|formatdatetime_long }}</b></p>{% endif %}
       <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
       {% if user == current_user %}

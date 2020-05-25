@@ -85,7 +85,7 @@ function runningSpeedGraph(arr) {
         options: {
             title: {
                 display: true,
-                text: "Your running speed over time"
+                text: "Minutes per kilometre over time"
             },
             legend: {
                 display: false

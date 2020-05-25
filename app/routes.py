@@ -44,7 +44,7 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data, is_admin=form.admin.data)
+        user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -87,7 +87,8 @@ def groupview():
 @login_required
 def users_page():
     users = User.query.all()
-    return render_template("userview.html", title="All Users", users=users)
+    followed_posts = current_user.followed_posts().all()
+    return render_template("userview.html", title="All Users", users=users, followed_posts=followed_posts)
 
 @app.route('/user/<username>')
 @login_required
@@ -218,3 +219,13 @@ def messages(username):
     messages = Message.query.filter_by(recipient_id=user.id)
     form = EmptyForm()
     return render_template('messages.html', messages=messages, form=form)
+
+# Delete message
+@app.route('/delete_message/<int:message_id>', methods= ['POST'])
+@login_required
+def delete_message(message_id):
+    message = Message.query.get(message_id)
+    db.session.delete(message)
+    db.session.commit()
+    flash('Message was deleted')
+    return redirect(url_for('messages', username=current_user.username))

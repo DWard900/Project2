@@ -16,7 +16,6 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    admin = BooleanField('Admin')
     submit = SubmitField('Register')
 
     def validate_username(self, username):
@@ -54,6 +53,6 @@ class EmptyForm(FlaskForm):
 
 class MessageForm(FlaskForm):
     message = TextAreaField(('Message'), validators=[
-        DataRequired(), Length(min=0, max=140)])
+        DataRequired(), Length(min=0, max=800)])
     
     submit = SubmitField(('Submit'))

@@ -155,7 +155,7 @@ function exerciseList(arr) {
 };
 
 
-// User Page - show buttons
+// User and Message Page - show hidden delete buttons when clicking Toggle Delete Buttons
 function showDeleteButton() {
   let elements = document.getElementsByClassName('del-button')
   for ( let x of elements) {
@@ -165,18 +165,5 @@ function showDeleteButton() {
       x.style.display = "none";
     }
   }
-}
-
-// Delete exercise on user page
-function deleteExercise(exerciseId) {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() { 
-      if (this.readyState == 4 && this.status == 200) {
-        console.log("ready");
-      }
-  };
-  let url = "http://localhost:5000/delete_post/" + exerciseId;
-  xhttp.open("POST", url, true);
-  xhttp.send();
 }
 
