@@ -9,7 +9,7 @@
     <div class="col-sm-6 text-center">
       <br>
       <br>
-      <h1 class="welcome">See All Users</h1>
+      <h1 class="welcome">All Users</h1>
     </div>
     <div class="col-sm-3 text-center">
         <img src="/static/assets/logo.png" alt="App logo">
@@ -18,13 +18,13 @@
 
   <div class="row">
     <div class="col-sm-12 text-center">
-      <p>Search for users here, view profiles and follow users you would like to see more of.</p>
+      <h2>Search for users here, view profiles and follow users you would like to see more of.</h2>
     </div>
   </div>
   <hr>
   <div class="row">
     <div class="col-sm-6 text-center">
-      <h2>All users</h2>
+      <h3>All users</h3>
       <br>
       <table class="user-table" align="center">
         <tr>
@@ -43,16 +43,23 @@
             {% else %}
             <td style="text-align: center">No</td>
             {% endif %}
-            <td><a class="button-link" href="{{ url_for('user', username=user.username) }}">Link to profile</a></td>
+            <td><a class="button-link" href="{{ url_for('user', username=user.username) }}">Profile</a></td>
             </tr>
             {% endif %}
           {% endfor %}
       </table>
     </div>
-    <div class="col-sm-6 text-center">
-      <h2>Latest updates from your followed users:</h2>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-6 text-center" id="user-exercise-list">
+      <h3>Latest updates from your followed users:</h3>
       <br>
+      {% for exercise in followed_posts %}
+        {% if exercise.user_id != current_user.id %}
+          {% include '_exercise.html' %}
+        {% endif %}
+      {% endfor %}
       </div>
+      <div class="col-sm-1"></div>
   </div>
 </div>
 

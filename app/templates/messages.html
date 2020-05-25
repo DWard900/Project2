@@ -1,22 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>{{ ('Messages') }}</h1>
-    {% for message in messages %}
-        {% include '_messages.html' %}
-    {% endfor %}
-    <nav aria-label="...">
-        <ul class="pager">
-            <li class="previous{% if not prev_url %} disabled{% endif %}">
-                <a href="{{ prev_url or '#' }}">
-                    <span aria-hidden="true">&larr;</span> {{ ('Newer messages') }}
-                </a>
-            </li>
-            <li class="next{% if not next_url %} disabled{% endif %}">
-                <a href="{{ next_url or '#' }}">
-                    {{ ('Older messages') }} <span aria-hidden="true">&rarr;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+  <div class="container-fluid">
+    <div class="row" >
+      <div class="col-sm-3"></div>
+      <div class="col-sm-3 text-center">
+        <h1>{{ ('Messages') }}</h1>
+      </div>
+      <div class="col-sm-3 text-center">
+        <br>
+        <button class="btn btn-danger" id='show_delete_btn' onclick="showDeleteButton()">Toggle Delete Messages</button>
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 text-center">
+        <div class="text-center", id="messages-list">
+        {% for message in messages %}
+          {% include '_messages.html' %}
+        {% endfor %}
+        </div>
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
+    </div>
+  </div>
 {% endblock %}

@@ -164,7 +164,7 @@ img {
 .exercise-text {
     border: 4px dashed #1F7A8C;
     padding: 0px;
-    margin-right: 100px;
+    margin-right: 50px;
     font-size: 14px;
 }
 
@@ -189,12 +189,12 @@ img {
 
 #user-exercise-list {
     height: 800px;
-    width: 700px;
+    width: 500px;
     overflow: auto;
 }
 
 .user-table {
-    width: 80%;
+    width: 100%;
 }
 
 .table-avatar {
@@ -202,13 +202,18 @@ img {
 }
 
 .table-username {
-    width: 25%;
+    width: 20%;
 }
 
 .table-coach {
-    width: 25%;
+    width: 20%;
 }
 
 .table-profile {
-    width: 25%;
+    width: 30%;
+}
+
+#messages-list {
+    height: 800px;
+    overflow: auto;
 }

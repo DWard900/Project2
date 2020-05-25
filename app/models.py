@@ -46,11 +46,6 @@ class User(UserMixin, db.Model):
     last_message_read_time = db.Column(db.DateTime)
 
 
-
-    #token = db.Column(db.String(32), index=True, unique = True)
-    #token_expiration = db.Column(db.DateTime)
-    #admin = db.Column(db.Boolean, default=False)
-
     # Token authentication for User API
     token = db.Column(db.String(32), index=True, unique = True)
     token_expiration = db.Column(db.DateTime)
