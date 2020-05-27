@@ -78,7 +78,7 @@ class SystemTest(unittest.TestCase):
     def test_coach(self):
         self.login("admin", "pw")
         self.driver.implicitly_wait(5)
-        self.driver.get('http://localhost:5000/user/pw')
+        self.driver.get('http://localhost:5000/user/admin')
         coach = self.driver.find_element_by_id('Coachtest').get_attribute('innerHTML')
         self.assertEqual(coach, "You are a Coach")
 
