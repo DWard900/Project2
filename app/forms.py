@@ -62,4 +62,5 @@ class AdminRegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     admin = BooleanField()
+    coach = BooleanField()
     submit = SubmitField('Register')

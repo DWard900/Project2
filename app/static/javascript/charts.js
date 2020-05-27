@@ -60,7 +60,6 @@ function exerciseGraph(arr) {
         
     });
 };
-
 // Creates running speed graph for personal profile
 function runningSpeedGraph(arr) {
     let ctx = document.getElementById("runningSpeed").getContext('2d');
@@ -88,7 +87,7 @@ function runningSpeedGraph(arr) {
         options: {
             title: {
                 display: true,
-                text: "Minutes per kilometre for runs over time"
+                text: "Minutes per kilometre over time"
             },
             legend: {
                 display: false
@@ -225,15 +224,6 @@ function exerciseGroupGraph(arr) {
         counts.push(tally)
     }
 
-    var backgroundColors = [];
-    for (i=0;i<uniqueusers.length;i++){
-        if (i % 2 === 0) {
-            backgroundColors.push("#331E36")
-        } else {
-            backgroundColors.push("#A5FFD6")
-        }
-    }
-
     var barChart = new Chart(ctx, {
         type: "bar",
         data: {
@@ -241,22 +231,19 @@ function exerciseGroupGraph(arr) {
             datasets: [{
                 label: "Number of Exercises",
                 data: counts,
-                backgroundColor: backgroundColors
+                backgroundColor: [
+                    "#331E36",
+                    "#A5FFD6",
+                    "#331E36",
+                    "#A5FFD6"
+                ],
             }]
         },
         options: {
-            legend: {
-                display: false
-            },
             scales: {
                 yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Number of exercises'
-                    },
                     ticks: {
-                        beginAtZero: true,
-                        callback: function(value) {if (value % 1 === 0) {return value;}}
+                        beginAtZero: true
                     }
                 }]
             }
@@ -266,7 +253,7 @@ function exerciseGroupGraph(arr) {
 
 };
 
-
+/// fastest run per user graoh
 function fastestRunData() {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { 
@@ -317,7 +304,7 @@ function fastestRunGraph(arr) {
 
     fastestruns=[]
 
-    ////select fastest
+    ////select fastest run for each user
     for (y = 0; y<uniqueusers.length; y++){
         fastest = 100000 
         for (i=0;i<user.length;i++){
@@ -331,13 +318,15 @@ function fastestRunGraph(arr) {
         fastestruns.push(fastest)
     }
 
+    
+    
 
     var barChart = new Chart(ctx, {
         type: "bar",
         data: {
             labels: uniqueusers,
             datasets: [{
-                label: "Minutes per km",
+                label: "Minutes per KM",
                 data: fastestruns,
                 backgroundColor: [
                     "#331E36",
@@ -348,15 +337,8 @@ function fastestRunGraph(arr) {
             }]
         },
         options: {
-            legend: {
-                display: false
-            },
             scales: {
                 yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Mins per kilometre'
-                    },
                     ticks: {
                         beginAtZero: true
                     }
@@ -422,6 +404,7 @@ function exerciseTimeGraph(arr) {
                 temp = []
                 temp.push(arr[b].date)
                 dates.push(arr[b].date)
+                ///temp.push(arr[b].time)
                 temp.push(arr[b].distance)
                 userdata.push(temp)
                 }
@@ -485,6 +468,12 @@ function exerciseTimeGraph(arr) {
         }
 
 
+    
+      
+
+    
+    
+
     var barChart = new Chart(ctx, {
         type: "line",
         data: {
@@ -494,10 +483,6 @@ function exerciseTimeGraph(arr) {
         options: {
             scales: {
                 yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Distance in km'
-                    },
                     ticks: {
                         beginAtZero: true
                     }

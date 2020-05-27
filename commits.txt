@@ -1,0 +1,872 @@
+commit 0abd9a9744c7681ad488a9f13cffd8168deb2f5e
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Mon May 25 22:52:28 2020 +0800
+
+    last
+
+commit 4ebe135e6897349607f829233216364e79c1af86
+Merge: 1eb640e e259cfc
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Mon May 25 22:28:48 2020 +0800
+
+    merge commit
+
+commit 1eb640e1a6d201bc50ff3e81ee2e9072fea4cd4c
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Mon May 25 22:27:50 2020 +0800
+
+    merge commit
+
+commit e259cfcfd2b1709af604d5c1f8c0905085bd15eb
+Merge: bd69d97 1ee91ac
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Mon May 25 22:26:16 2020 +0800
+
+    Merge pull request #32 from DWard900/Elise
+    
+    Elise
+
+commit 1ee91acffb2823274250923e545257872d6149d1
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Mon May 25 22:25:32 2020 +0800
+
+    Formatting
+
+commit bd69d97f89106dcb08f072e64541946bdf58da20
+Merge: a8f00c8 57a6538
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Mon May 25 22:20:21 2020 +0800
+
+    Merge pull request #31 from DWard900/dan
+    
+    tokens
+
+commit 57a653852a40d7c7513d7602b1b7a71125da2680
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Mon May 25 22:19:17 2020 +0800
+
+    tokens
+
+commit c6a255a971a5fd95f1d71aef1aa1121fb3f545bb
+Merge: 5b3df05 a8f00c8
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Mon May 25 22:11:47 2020 +0800
+
+    Fixing conflicts
+
+commit 5b3df0545b05d5a0cb82e55b704e346d81d708a2
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Mon May 25 22:09:17 2020 +0800
+
+    System testing
+
+commit a8f00c88b529db40e5eca579cf4af3575c22cc7b
+Merge: d06aae2 85e5369
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Mon May 25 21:55:55 2020 +0800
+
+    Merge pull request #30 from DWard900/dan
+    
+    admin func added
+
+commit 85e53696e421a833d9ec849ab3ca4f9cdd7709c7
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Mon May 25 21:08:21 2020 +0800
+
+    admin func added
+
+commit c9136a3114ce1a7085f8cb8d0819a4a7e13f44f9
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Mon May 25 19:42:45 2020 +0800
+
+    Finishing unit testing
+
+commit c7024cec2092c529e81559e719467ecc40dbb256
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Mon May 25 19:42:18 2020 +0800
+
+    Updates to graphs, html pages
+
+commit 5a1a8c61f847cc3f56436b51ea2e2a7c104ec4cd
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Mon May 25 15:22:04 2020 +0800
+
+    Adding new user exercise graph
+
+commit f3020d167f37ed0cb31a52787f93da99f244f120
+Merge: f0ef7ae d06aae2
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Mon May 25 12:16:20 2020 +0800
+
+    Fixing conflicts
+
+commit f0ef7aeb93181fb7754aeaa6673e1b744957ed55
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Mon May 25 12:13:03 2020 +0800
+
+    database
+
+commit d06aae208a1e1114a9b5ea87b9a70e1f808050b7
+Merge: 925cf83 f30cfdb
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Mon May 25 12:12:24 2020 +0800
+
+    Merge pull request #29 from DWard900/dan
+    
+    Dan
+
+commit f30cfdb34d6434adb4697c3f4ae580b906d090ae
+Merge: 510ae6c 925cf83
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Mon May 25 12:11:08 2020 +0800
+
+    fixing conflicts
+
+commit 510ae6cf482f1b9db97cd142889c17af02d5ca56
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Mon May 25 12:03:07 2020 +0800
+
+    removed db
+
+commit 925cf839781955c336d8c61cfec01d55e67c318c
+Merge: deb44a7 4fdb965
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Mon May 25 12:00:54 2020 +0800
+
+    Merge pull request #25 from DWard900/Elise
+    
+    Elise
+
+commit 4fdb9655c0109a45b346598d60834daa915a8c1a
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Mon May 25 11:56:30 2020 +0800
+
+    Formatting messages and adding delete
+
+commit a3d4839fd06984f45a90c3ad3f1f26d717ee79e4
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Mon May 25 11:56:16 2020 +0800
+
+    All users page followed posts
+
+commit 8916bcbf0e4d34b670df6b4a9b0f6ca8aa9ac3af
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Mon May 25 11:38:25 2020 +0800
+
+    line graph
+
+commit 272ae2b1e0807af35c333babdd03d4c6418296ad
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Sun May 24 23:28:34 2020 +0800
+
+    more graphs
+
+commit d4f24ebb374c4bf81888bb34324cc8bcddac46e9
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sun May 24 23:23:24 2020 +0800
+
+    Updating some HTML templates
+
+commit e8ef7da5cd7234c226383d39bcbc10b4c7d1a090
+Merge: 012657a deb44a7
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sun May 24 18:16:56 2020 +0800
+
+    Merge branch 'master' into Elise
+
+commit 012657a10171c32a3b9e544ee7ecbb1e8ca01c0c
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sun May 24 18:16:11 2020 +0800
+
+    Small changes to chart
+
+commit 82ab53b1ecef3dc6838317e7ac4b6cdd9e21b801
+Merge: ec3aac6 deb44a7
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Sun May 24 17:52:45 2020 +0800
+
+    Merge branch 'master' into dan
+
+commit ec3aac6e5b1f1a60220419206a4f4e4986e78218
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Sun May 24 17:50:44 2020 +0800
+
+    message
+
+commit deb44a72020989418fa0a55704974f87b64da833
+Merge: fc1c6a6 3ab0ff3
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Sun May 24 17:42:43 2020 +0800
+
+    Merge pull request #24 from DWard900/Dan
+    
+    Dan
+
+commit 3ab0ff3ad165a5cec2afeac48f33cf85804ed03c
+Merge: 4184db8 fc1c6a6
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Sun May 24 17:42:36 2020 +0800
+
+    Merge branch 'master' into Dan
+
+commit 4184db8fad05658df5a897ebb4be3d8631e0f766
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Sun May 24 17:33:21 2020 +0800
+
+    second graph
+
+commit fc1c6a6c7c565cae1d91302e87b9d25467b1d4a1
+Merge: 685405c 887c9fe
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Sun May 24 17:26:46 2020 +0800
+
+    Merge pull request #23 from DWard900/Elise
+    
+    Elise
+
+commit 887c9fe20c3307499b5b9e8bfaad8d2c6d62a35b
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sun May 24 17:24:18 2020 +0800
+
+    Adding all users page
+
+commit 48e2f3324d6b360143556021c65f46b0f9e901fb
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sun May 24 16:48:03 2020 +0800
+
+    Finishing results page, exercises on profile page
+
+commit 9d74d91ada6533565cecefce9e7a5a857f6e8381
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Sun May 24 14:34:59 2020 +0800
+
+    graph on group page
+
+commit 6d3e919dc29793d4878924b82c7b55bc993566c6
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Sat May 23 23:34:03 2020 +0800
+
+    goals
+
+commit f797caebf219bf27c6f6c9587b5b74288e0e8bfc
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 23 22:06:09 2020 +0800
+
+    Changes to quiz page and results
+
+commit 4b9348dac9529cbead7a6a3a14ad28e6af9a68fd
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 23 20:59:35 2020 +0800
+
+    Fixing conflicts
+
+commit 1c832cf2dec5f5335925128077bcc95b7e745467
+Merge: 5bc5f33 871681a
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 23 18:04:43 2020 +0800
+
+    Merge branch 'master' into Elise
+
+commit 871681a5fc112ce6c5008e3d8c90497cc9a57e0a
+Merge: 5b97b89 685405c
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 23 18:03:40 2020 +0800
+
+    Fixing conflicts
+
+commit 5b97b89cbbdaea19434540f5451b888305ff8b8f
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 23 18:02:26 2020 +0800
+
+    Fixing conflicts
+
+commit 5bc5f33c4358a4d9a15831d2d0eaf12aa0e1a696
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 23 18:01:30 2020 +0800
+
+    git ignore upate
+
+commit 685405c8fb3b32bb5b95ad03dde3fac68d7431a6
+Merge: 1683fcf 518cd9c
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Sat May 23 17:59:02 2020 +0800
+
+    Merge pull request #22 from DWard900/Dan
+    
+    Dan
+
+commit 518cd9c835dbc30dfaaa36a4c5a27b49e981f174
+Merge: 20253f4 71ce7b2
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Sat May 23 17:57:40 2020 +0800
+
+    fixing conflicts
+
+commit 71ce7b2c8d25a6feea25f48adc8634bd24f8f1b3
+Merge: c0f1d8a 1683fcf
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Sat May 23 17:52:27 2020 +0800
+
+    fixing conflicts
+
+commit c0f1d8adaf4eb81dbe7bbdb0e26cf39c644cb0d7
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Sat May 23 17:49:16 2020 +0800
+
+    ignore added
+
+commit 1683fcff673497cb1d55a1413cd6529ccf75eab2
+Merge: a18369c 6941ac7
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Sat May 23 17:47:34 2020 +0800
+
+    Merge pull request #21 from DWard900/Elise
+    
+    Elise
+
+commit 20253f4548e4dfea7db43b1dc3837f76e0d00945
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Sat May 23 17:41:57 2020 +0800
+
+    messages added
+
+commit 6941ac7215bce27293325464feda02693de01434
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 23 16:21:10 2020 +0800
+
+    Updating some HTML templates
+
+commit d790265b9b3c251aa247f67707efbf10dcdea973
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 23 15:15:28 2020 +0800
+
+    Added restricted admin page
+
+commit aeb773c9b42fd6e4d448636bb28751886174862d
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 23 14:51:05 2020 +0800
+
+    Token auth working now
+
+commit e3b5a1f7b55a771961a31a518dfed3dbbaba6710
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 23 14:36:38 2020 +0800
+
+    Get token now working
+
+commit 2634025ec4011b2e6b4d9287d31ee3cd7d4bceff
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 23 11:42:51 2020 +0800
+
+    Tokens for user authentication
+
+commit a58886eccb90d2195ab36307701195bce3ab8488
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Fri May 22 20:30:01 2020 +0800
+
+    message
+
+commit a18369c1986118cd2639b68eb896d51640c269c3
+Merge: 346e706 88b509f
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Thu May 21 18:19:20 2020 +0800
+
+    Merge pull request #19 from DWard900/Elise
+    
+    Elise
+
+commit 88b509ffc7dfaffcb0feafde24d447cc2d95d97f
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Thu May 21 18:18:11 2020 +0800
+
+    Updates to unit testing
+
+commit 1b87f49cd2af31a9288d85f0d146a55be220f709
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Thu May 21 17:06:47 2020 +0800
+
+    Editing html templates
+
+commit f42315d0d88d18764081078bb064099fa54ab1ab
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Wed May 20 22:34:31 2020 +0800
+
+    add migrations to gitignore
+
+commit 276be5bb3800c344d3c934996c4bc3a51948ca5b
+Merge: 25755f4 346e706
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Wed May 20 22:32:20 2020 +0800
+
+    Merge branch 'master' into Elise
+
+commit 25755f4de9e779b56a1ac678e0a777c366c52b3b
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Wed May 20 22:01:49 2020 +0800
+
+    Updates to unit testing
+
+commit 4b3fa4d88282081701d64fb911a90a5ad4fcc8fc
+Merge: 5d05ea9 346e706
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Wed May 20 19:44:23 2020 +0800
+
+    removed db
+
+commit 5d05ea919170102870f7d23d23b0759489b78680
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Wed May 20 19:39:22 2020 +0800
+
+    added items to git ignore
+
+commit 346e706c6098acf92e201f366de8e11e0e4e3ebb
+Merge: 00e49eb 04f19fa
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Wed May 20 18:52:14 2020 +0800
+
+    Merge pull request #18 from DWard900/Dan
+    
+    Dan
+
+commit 04f19faa1bde7cb0580d7614dd958c2769c091c1
+Merge: a2bef48 099658d
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Wed May 20 18:49:35 2020 +0800
+
+    Merge branch 'Dan' of https://github.com/DWard900/Project2 into Dan
+
+commit a2bef4875e4465d095df3fd65477a5d2806875e1
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Wed May 20 18:45:32 2020 +0800
+
+    added functions to coach and admins, increased db
+
+commit 00e49eb9567b2bf56474b0bfbe8789f01c8df9f5
+Merge: 25be81b fd9b7b5
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Wed May 20 18:35:43 2020 +0800
+
+    Merge pull request #17 from DWard900/Elise
+    
+    Elise
+
+commit fd9b7b5d50e6efc32263bfae7173ab8ffb6ff7bc
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Wed May 20 18:33:00 2020 +0800
+
+    Adding some unit tests
+
+commit d415620cbe7b5bc711a1ffec76246068610e9daf
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Wed May 20 10:13:03 2020 +0800
+
+    Readding database migrations
+
+commit 599d4aca82a94098e959b45084dcfd4a1f41eebf
+Merge: 5ed262e 25be81b
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Tue May 19 09:31:23 2020 +0800
+
+    Fixing merge conflicts
+
+commit 5ed262ed6acaff356f3015c2400b3efe2ae761f5
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Tue May 19 09:27:37 2020 +0800
+
+    Updating api files and adding javascript
+
+commit 25be81be3dd54ab52c03665d83ce23b33aea9902
+Merge: 027276b 099658d
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Tue May 19 09:24:04 2020 +0800
+
+    Merge pull request #16 from DWard900/Dan
+    
+    Re uploading due to merge issues
+
+commit 099658db4ea4c9cded1987ca8205df29a4749ab5
+Merge: 09b0a1b 027276b
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Tue May 19 09:23:48 2020 +0800
+
+    Merge branch 'master' into Dan
+
+commit 09b0a1b42a7e10fb8ad27533042d92df808203af
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Tue May 19 09:16:03 2020 +0800
+
+    Re uploading due to merge issues
+
+commit 027276b931147522aa08deab3266054322ed317e
+Merge: b6a2900 7494b82
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Sat May 16 16:30:43 2020 +0800
+
+    Merge pull request #15 from DWard900/Elise
+    
+    Added API to get all users
+
+commit 7494b825e671b6b70d7a8b1cd42e5388ccffd654
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 16 16:30:10 2020 +0800
+
+    Added API to get all users
+
+commit b6a2900d50c6f60fa18c32a440b4e64636053f67
+Merge: 95d0349 10d679f
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Sat May 16 16:22:32 2020 +0800
+
+    Merge pull request #14 from DWard900/Elise
+    
+    Some files went missing
+
+commit 10d679f81dab0f8a537b2b0d908c5bb4e45a1115
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 16 16:22:05 2020 +0800
+
+    Some files went missing
+
+commit 95d0349b50a942ff4258770db915b835743464bf
+Merge: 7be85cd 3839c02
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Sat May 16 15:29:00 2020 +0800
+
+    Merge pull request #13 from DWard900/Elise
+    
+    Elise
+
+commit 3839c026c07ee4256e91ea61f28c8c83d04b468b
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Sat May 16 15:28:02 2020 +0800
+
+    Some work on the api
+
+commit 0a731b1c8e82b79b6078f836189bbdc66959e292
+Merge: 8048c25 f6ed2d1
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 21:03:45 2020 +0800
+
+    Fixing conflicts
+
+commit f6ed2d1efa247c80521ce23be381221b8c15ff75
+Merge: ece6eca 7be85cd
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 21:02:26 2020 +0800
+
+    Added db to gitignore
+
+commit 7be85cd4ddbad9eae54c7e43362742c04ef11332
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Fri May 15 21:00:52 2020 +0800
+
+    removed db and added to ingore
+
+commit ece6eca17500e850b987d0c01556d249d998fa7f
+Merge: 9eed492 daed830
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 20:50:16 2020 +0800
+
+    Fixing conflict with gitignore
+
+commit 8048c2591d40f9425dc4935f2f1385e07a4c49bb
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 20:46:36 2020 +0800
+
+    Trying API
+
+commit daed8302c8eb56c01bb5e5d53a1e256d8576b9ab
+Merge: e792034 661f453
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Fri May 15 20:45:34 2020 +0800
+
+    Merge pull request #12 from DWard900/Dan
+    
+    Dan
+
+commit 661f4532d1a97ced4f5fdd9cb8315423ed656ba4
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Fri May 15 20:44:19 2020 +0800
+
+    User/ index page update
+
+commit 9254a7d5f46ab9323c5453c4e760077a3ddcaead
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Fri May 15 19:12:18 2020 +0800
+
+    database change
+
+commit 29bd2001c21e99571b4fc8297d9030a08d263640
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Fri May 15 19:08:35 2020 +0800
+
+    message
+
+commit e79203435d47e3f847ed543fc3e0d0dab8a6bd7f
+Merge: 0f35882 8fb072a
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Fri May 15 16:16:17 2020 +0800
+
+    Merge pull request #11 from DWard900/Elise
+    
+    Updating Register html and .gitignore
+
+commit 8fb072ad37c61ff355be6275247d51cfe34e85bd
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 16:15:35 2020 +0800
+
+    Updating Register html and .gitignore
+
+commit 0f35882b072c68158ff14c63869851791048c93a
+Merge: 01943a9 f4bcb8f
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Fri May 15 15:53:02 2020 +0800
+
+    Merge pull request #10 from DWard900/Elise
+    
+    Elise
+
+commit f4bcb8fab7200cbec388603308ab59f477744621
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 15:51:56 2020 +0800
+
+    Yet another commit
+
+commit f9d22ad43d6243fe4af918e7319a2f8f4962dbba
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 15:49:27 2020 +0800
+
+    Tidied up to see if resolves conflicts
+
+commit 01943a994b101d83f3ce949f82a09a7297c42b7f
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 15:38:41 2020 +0800
+
+    Deleting problem files from master
+
+commit 9eed4928b24d4d36cea14e92b4bc1dfd1a3955b5
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 15:18:28 2020 +0800
+
+    Trying to resolve conflicts with master
+
+commit 769d784c6d80ee8d2c329683dedb0b5e9a4b5a6b
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 15:09:41 2020 +0800
+
+    Trying to resolve conflicts
+
+commit cb1c82945392c9b0aff714fcc5fca52413ef7123
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 15:00:58 2020 +0800
+
+    all pyc files removed
+
+commit 4e6313444bb3eab9774226fc0032b9ab188a25b8
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 14:56:19 2020 +0800
+
+    Trying to resolve conflicts
+
+commit 1b6ac669b14244fac6e83d696ec0ed71e93d992d
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 14:51:47 2020 +0800
+
+    Trying to resolve conflicts
+
+commit c7bc951ee671c4c2efa1173556984938ab109c00
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 14:48:56 2020 +0800
+
+    Incorporating HTML templates into app
+
+commit 1da24add042b0e3c9064f53f7b8e989f12539475
+Merge: ae6bca5 fde7397
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 14:46:19 2020 +0800
+
+    resolving conflicts
+
+commit fde739708f89107790a991a889bc8ef4b476c940
+Merge: c03588e 0c65251
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 14:29:20 2020 +0800
+
+    Merge branch 'Test'
+
+commit 0c65251d3196ffb8cb8ce9f50f486ba3047eb060
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 14:28:17 2020 +0800
+
+    Test
+
+commit b7f79046784112f7b850d984d1dd1b242579dfd1
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 14:15:24 2020 +0800
+
+    Incorporating HTML templates into app
+
+commit ae6bca5bbefc711c3e271c625a76700cb57ecb78
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 14:00:47 2020 +0800
+
+    Committing without database to resolve conflicts
+
+commit e8b0b1fa1c665c2570af2260c69fed6f40398bba
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri May 15 13:59:45 2020 +0800
+
+    Another commit to resolve conflicts
+
+commit fd2fc7c38e99147b11a8742599373393eeaae712
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Thu May 14 21:19:19 2020 +0800
+
+    Incorporating HTML templates into app
+
+commit e60a6226c38352bdb4abbf9943b13ad0a45193db
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Thu May 14 21:06:29 2020 +0800
+
+    User and Index Page Alterations
+
+commit 9a810dc31ff0678a5029992bc8731d313e0d6f35
+Merge: bb64d92 8aedd44
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Thu May 14 18:36:12 2020 +0800
+
+    Merge pull request #5 from DWard900/Elise
+    
+    Getting database working
+
+commit 8aedd4437caf4f3cb6e23374b07262333db11bc7
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Thu May 14 18:35:27 2020 +0800
+
+    Getting database working
+
+commit bb64d9247469bb18db2fdd677a31b7e0f6752125
+Merge: e507b4a 9fd4dc5
+Author: EliseR101 <42899259+EliseR101@users.noreply.github.com>
+Date:   Thu May 14 15:44:32 2020 +0800
+
+    Merge pull request #4 from DWard900/Elise
+    
+    Went back through Mega Tutorial but as applied to this app. This is entire app up to chapter 6
+
+commit 9fd4dc5afe20c34f0598a76a9699f76a58154e56
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Thu May 14 15:42:49 2020 +0800
+
+    Going back through Mega Tutorial but for fitness app - up to Chap 6
+
+commit 85cadfa9e486984a91a00ad4757dd169e5934146
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Wed May 13 18:28:58 2020 +0800
+
+    Up to Chap 9 of Flask Mega Tutorial
+
+commit 74c8c4fbcfe416988777291cb7c4c38f0dd2653f
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Tue May 12 20:16:35 2020 +0800
+
+    Draft template HTML pages based on wireframes
+
+commit 183e3bfb531e990c07d3bf5c440f32994b9b7040
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Tue May 12 20:15:58 2020 +0800
+
+    Wireframes and user story examples
+
+commit 0709856b35acae7e4b8f6812230ad8d1b14cb453
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Thu May 7 15:44:05 2020 +0800
+
+    Up to Chapter 8 of Mega Tutorial
+
+commit a6632bc7790e13d4690ba00933d5c90729f2da31
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Thu May 7 12:41:46 2020 +0800
+
+    Up to Chapter 6 of Flask Mega Tutorial
+
+commit 15ce3bea8e36fac88755a9a0b336835951e61e26
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Thu May 7 11:43:05 2020 +0800
+
+    Up to chapter 5 of Mega tutorial
+
+commit 85b019be0b8f5a915f0ceed3ad0143750cde8f5a
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Mon May 4 09:36:33 2020 +0800
+
+    Mega tutorial microblog up to chapter 4
+
+commit e507b4aeae80de6074e7e18295d0991d8a4630d2
+Merge: c03588e 1e78e2b
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Wed Apr 29 16:57:01 2020 +0800
+
+    Merge pull request #3 from DWard900/dan
+    
+    Basic flask and html structure as shown in workshop7 / chpt 1-3 of the …
+
+commit 1e78e2b795644578b36635959d89a201f49ca15a
+Author: Dan Ward <22744074@student.uwa.edu.au>
+Date:   Wed Apr 29 16:51:29 2020 +0800
+
+    Basic flask and html structure as shown in workshop7/chpt 1-3 of the mega tutorial by Miguel Grinberg
+
+commit d53a9708e9f9292f8916a6060a6f0583723a057f
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri Apr 24 19:20:39 2020 +0800
+
+    Testing upload of app.py
+
+commit ee10ade3d0430f79a817ae78276f1be63d6bfade
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri Apr 24 19:02:27 2020 +0800
+
+    Testing change to app.py
+
+commit 9dfdf705c3e6beff4401c1e4f7fde8b9d0613eff
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Fri Apr 24 18:58:44 2020 +0800
+
+    Testing commit of app.py
+
+commit c03588e0960fffa0ffe6ff3aadb5b9e3d1c80782
+Merge: 55214bd cca4694
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Wed Apr 22 11:47:08 2020 +0800
+
+    Merge pull request #2 from EliseR101/Elise
+    
+    Elise edits to testing page
+
+commit cca46945be7bbb8a96dfd9a37644746025ad0dc7
+Author: EliseR101 <elise.rattigan@googlemail.com>
+Date:   Wed Apr 22 11:39:00 2020 +0800
+
+    Elise edits to testing page
+
+commit 55214bd6d502c24e26ac21558719de8adde00444
+Merge: 8802f23 60ee694
+Author: DWard900 <54071669+DWard900@users.noreply.github.com>
+Date:   Wed Apr 22 11:09:02 2020 +0800
+
+    Merge pull request #1 from DWard900/dan
+    
+    Testing that I am able to merge files.
+
+commit 60ee6944afda2ad3ca33dec28a4ab4835f225075
+Author: DWard900 <22744074@student.uwa.edu.au>
+Date:   Wed Apr 22 10:50:01 2020 +0800
+
+    testing that I am able to merge files
+
+commit 8802f2343aa0e775cea50975d8282d359e8390a8
+Author: DWard900 <22744074@student.uwa.edu.au>
+Date:   Wed Apr 22 10:29:52 2020 +0800
+
+    Started porject, getting set up with Git

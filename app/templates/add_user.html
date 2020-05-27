@@ -50,12 +50,19 @@
             {% for error in form.admin.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
+          </p>
+
+          <p>
+            {{ form.coach.label }}<br>
+            {{ form.coach }}<br>
+            {% for error in form.coach.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+          </p>
+
           <p>{{ form.submit() }}</p>
       </form>
     </div>
   </div>
-
-
 
 {% endblock %}
